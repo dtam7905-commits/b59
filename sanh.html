@@ -3,443 +3,818 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>B59CLUB - Sảnh trò chơi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B59CLUB - Sảnh giải trí</title>
+
 <style>
-*{box-sizing:border-box}
-:root{--bg:#041c18;--panel:#0b382e;--line:#247765;--mint:#48e0c0;--gold:#ffd36a}
-body{margin:0;background:var(--bg);color:#f3fff9;font-family:Arial,sans-serif}
-button,input{font:inherit}
-button{cursor:pointer}
-header{
- height:64px;background:#06251f;border-bottom:1px solid #286b59;
- display:flex;align-items:center;justify-content:space-between;
- padding:0 max(16px,calc((100% - 1150px)/2));position:sticky;top:0;z-index:5
+:root {
+  --bg:#031b17;
+  --panel:#0b382f;
+  --panel2:#10483c;
+  --green:#28d6b0;
+  --gold:#ffd36a;
+  --text:#f1fff9;
+  --muted:#a7c8bd;
 }
-.logo{font-size:27px;font-weight:900;color:var(--mint)}
-.header-right{display:flex;gap:8px;align-items:center}
-.header-right button,.login-btn{
- border:1px solid #398b77;border-radius:10px;padding:10px 13px;
- background:#12483b;color:white;font-weight:bold
+
+* {box-sizing:border-box}
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  padding-bottom:90px;
 }
-.wrap{max-width:1150px;margin:auto;padding:16px}
-.welcome{
- background:linear-gradient(120deg,#0d5945,#092d27);
- border:1px solid #318d75;border-radius:18px;padding:20px;margin-bottom:18px
+button {cursor:pointer;font-family:inherit}
+.topbar {
+  height:64px;
+  background:#06251f;
+  border-bottom:1px solid #236b5b;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
-.welcome h1{font-size:clamp(22px,4vw,34px);margin:0 0 8px;color:var(--mint)}
-.welcome p{color:#c0ddd2;margin:0;line-height:1.5}
-.balance{
- margin-top:15px;padding:14px;border-radius:12px;
- background:#06271f;display:flex;justify-content:space-between;
- align-items:center;gap:10px;flex-wrap:wrap
+.logo {
+  font-size:25px;
+  font-weight:900;
+  color:var(--green);
 }
-.balance strong{font-size:clamp(20px,4vw,27px);color:var(--gold)}
-.banner{
- position:relative;width:100%;aspect-ratio:16/5;min-height:125px;
- max-height:330px;border-radius:18px;overflow:hidden;
- border:1px solid #398b77;margin:16px 0 24px;background:#103c31
+.account {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
 }
-.banner img{width:100%;height:100%;object-fit:cover;display:block}
-.banner-fallback{
- position:absolute;inset:0;display:flex;align-items:center;
- justify-content:center;text-align:center;color:#8cebd6;
- font-size:clamp(20px,4vw,38px);font-weight:900;
- background:linear-gradient(120deg,#125c48,#06241e)
+.small-btn {
+  border:1px solid #388a76;
+  background:#10483c;
+  color:white;
+  padding:9px 13px;
+  border-radius:10px;
 }
-.section-title{
- display:flex;justify-content:space-between;align-items:center;
- gap:10px;margin:22px 0 13px
+
+/* MAIN */
+.container {
+  width:min(1100px,94%);
+  margin:18px auto;
 }
-.section-title h2{font-size:clamp(19px,3vw,25px);margin:0}
-.section-title span{color:var(--mint);font-size:13px}
-.games{
- display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px
+.profile {
+  background:linear-gradient(130deg,#105443,#082c25);
+  border:1px solid #267e69;
+  border-radius:18px;
+  padding:20px;
 }
-.game{
- min-width:0;background:linear-gradient(145deg,#104b3c,#082c25);
- border:1px solid #287765;border-radius:16px;padding:15px;
- transition:.2s;display:flex;flex-direction:column
+.character {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:15px;
 }
-.game.active{border:1px solid #48dcb9}
-.game:hover{transform:translateY(-3px);border-color:var(--mint)}
-.game .emoji{font-size:42px;margin-bottom:10px}
-.game h3{margin:0 0 6px;font-size:18px}
-.game p{margin:0 0 13px;color:#a9c9bd;font-size:13px;min-height:32px}
-.game button{
- margin-top:auto;border:0;border-radius:25px;padding:10px 13px;
- background:linear-gradient(90deg,#25bd9c,#75ecd0);
- color:#06352b;font-weight:900
+.avatar {
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#fbdc83,#a66c17);
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  border:2px solid #ffe39a;
 }
-.game button:disabled{background:#285b4e;color:#aac5ba;cursor:not-allowed}
-.utilities{
- display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:15px 0
+.character-name {
+  font-size:19px;
+  font-weight:bold;
 }
-.utility{
- background:#0b382e;border:1px solid #286d5b;border-radius:13px;
- text-align:center;padding:18px 8px
+.character-sub {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
 }
-.utility b{display:block;margin:7px 0;color:var(--mint)}
-footer{text-align:center;color:#77998d;padding:24px 10px;font-size:12px}
-.bottom{
- display:none;position:fixed;bottom:0;left:0;right:0;z-index:6;
- background:#041f19;border-top:1px solid #286b59;
- grid-template-columns:repeat(4,1fr);padding:7px 3px calc(7px + env(safe-area-inset-bottom))
+.vip-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#082b24;
+  border:1px solid #886a2e;
+  border-radius:12px;
+  padding:12px 14px;
+  margin-bottom:13px;
 }
-.bottom button{border:0;background:none;color:#9bb9ad;font-size:11px;padding:5px}
-.bottom span{display:block;font-size:21px;margin-bottom:4px}
-.modal{
- display:none;position:fixed;inset:0;background:#000b;z-index:20;
- align-items:center;justify-content:center;padding:15px
+.vip-label {
+  color:var(--gold);
+  font-weight:bold;
 }
-.modal.show{display:flex}
-.modal-box{
- width:min(420px,100%);background:#0a382e;border:1px solid #45c8a8;
- border-radius:17px;padding:20px;box-shadow:0 15px 60px #0009
+.vip-button {
+  border:0;
+  border-radius:20px;
+  background:linear-gradient(90deg,#ffdc83,#c58a2d);
+  color:#402600;
+  font-weight:bold;
+  padding:9px 18px;
 }
-.modal-box h2{color:var(--mint);margin:0 0 15px}
-.modal-box input{
- width:100%;padding:13px;margin:6px 0;border-radius:9px;
- border:1px solid #448c78;background:#06271f;color:white
+.balance-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:#04251e;
+  border-radius:13px;
+  padding:14px;
 }
-.modal-box button{
- width:100%;padding:12px;margin-top:9px;border:0;
- border-radius:9px;background:var(--mint);color:#06372c;font-weight:bold
+.balance-info small {
+  display:block;
+  color:var(--muted);
+  margin-bottom:5px;
 }
-.modal-box .secondary{background:#1a5143;color:white}
-.modal-box .close{background:transparent;color:#b7d4c8;border:1px solid #397765}
-.modal-box small{display:block;color:#a9c9bd;margin-top:10px;line-height:1.5}
-#loader{
- display:none;position:fixed;inset:0;background:#031b16;
- z-index:100;align-items:center;justify-content:center;text-align:center;padding:20px
+.balance-number {
+  color:var(--gold);
+  font-size:25px;
+  font-weight:900;
 }
-#loader.show{display:flex}
-.load-content{width:min(400px,90%)}
-.load-logo{font-size:36px;font-weight:900;color:var(--mint);margin-bottom:12px}
-.load-percent{font-size:43px;color:var(--gold);font-weight:bold;margin:16px}
-.load-track{height:12px;background:#183e33;border-radius:20px;overflow:hidden}
-.load-fill{height:100%;width:0;background:linear-gradient(90deg,#1bbf9b,#ffe079);transition:width .08s}
-.load-text{color:#b8d6ca;margin-top:13px;font-size:13px}
-@media(max-width:850px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){
- header{height:57px;padding:0 12px}
- .logo{font-size:23px}
- .wrap{padding:12px 10px 85px}
- .welcome{padding:16px}
- .banner{aspect-ratio:16/7;min-height:110px}
- .games{gap:9px}
- .game{padding:12px;border-radius:13px}
- .game .emoji{font-size:35px}
- .game h3{font-size:15px}
- .game p{font-size:12px}
- .game button{font-size:12px;padding:9px 5px}
- .bottom{display:grid}
- .header-right button{padding:9px;font-size:12px}
- .utilities{gap:7px}
- .utility{padding:13px 5px;font-size:12px}
+.money-actions {
+  display:flex;
+  gap:8px;
+}
+.money-actions button {
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  font-weight:bold;
+  color:#06251f;
+  background:linear-gradient(90deg,#29d6b1,#82f1d5);
+}
+.money-actions .withdraw {
+  background:linear-gradient(90deg,#ffd36a,#e7a93e);
+}
+
+/* BANNER */
+.banner {
+  width:100%;
+  height:220px;
+  margin:18px 0 25px;
+  border:1px solid #267e69;
+  border-radius:18px;
+  overflow:hidden;
+  background:linear-gradient(120deg,#145b48,#062a23);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.banner img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.banner-fallback {
+  text-align:center;
+  padding:20px;
+}
+.banner-fallback h1 {
+  color:#76f0d3;
+  font-size:32px;
+  margin:0 0 10px;
+}
+
+/* GAMES */
+.section-title {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:20px 0 13px;
+}
+.section-title h2 {
+  font-size:21px;
+  margin:0;
+}
+.section-title span {
+  color:var(--green);
+  font-size:13px;
+}
+.games {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.game {
+  background:linear-gradient(145deg,#10483c,#082c25);
+  border:1px solid #246e5c;
+  border-radius:16px;
+  padding:16px 13px;
+  min-height:185px;
+  display:flex;
+  flex-direction:column;
+}
+.game.active {
+  border-color:#36dcb9;
+}
+.game-icon {
+  font-size:39px;
+  margin-bottom:10px;
+}
+.game h3 {
+  margin:0 0 7px;
+  font-size:16px;
+}
+.game p {
+  color:var(--muted);
+  font-size:12px;
+  margin:0 0 14px;
+  flex:1;
+}
+.game button {
+  width:100%;
+  border:0;
+  border-radius:25px;
+  padding:11px 7px;
+  background:linear-gradient(90deg,#21bfa0,#73e9ce);
+  color:#033329;
+  font-weight:bold;
+}
+.game button.disabled {
+  background:#245f51;
+  color:#c0ded4;
+}
+.game button:active,.small-btn:active {
+  transform:scale(.97);
+}
+
+/* UTILITIES */
+.utilities {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:25px;
+}
+.utility {
+  background:#0d3c32;
+  border:1px solid #246e5c;
+  border-radius:14px;
+  padding:17px 8px;
+  text-align:center;
+}
+.utility .u-icon {font-size:28px}
+.utility h3 {font-size:14px;margin:8px 0 5px}
+.utility p {font-size:11px;color:var(--muted);margin:0}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:76px;
+  background:rgba(3,29,24,.98);
+  border-top:1px solid #286e5e;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:20;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.nav-item {
+  background:none;
+  border:0;
+  color:#9bbeb2;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+}
+.nav-item .nav-icon {font-size:22px}
+.nav-item.active {color:#36e3bd}
+
+/* MODALS */
+.overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  z-index:50;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.modal {
+  width:min(420px,100%);
+  background:#0b392f;
+  border:1px solid #38a98e;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 15px 50px #0009;
+}
+.modal h2 {color:#62e9c8;margin-top:0}
+.modal input {
+  display:block;
+  width:100%;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #397a68;
+  background:#05271f;
+  color:white;
+  margin:10px 0;
+  outline:none;
+}
+.modal button {
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  margin-top:9px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#20c6a5,#7af0d4);
+  color:#032b22;
+}
+.modal .secondary {
+  background:#174d40;
+  color:white;
+}
+.modal .close {
+  background:transparent;
+  border:1px solid #397a68;
+  color:white;
+}
+.modal-note {
+  color:#a9c9be;
+  font-size:12px;
+  line-height:1.5;
+}
+#loading {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#031b17;
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+.loading-logo {
+  font-size:30px;
+  color:#4ce3c1;
+  font-weight:900;
+  margin-bottom:22px;
+}
+.loading-track {
+  width:min(280px,75%);
+  height:9px;
+  border-radius:20px;
+  background:#17483c;
+  overflow:hidden;
+}
+.loading-fill {
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#20b995,#8affdd);
+}
+.loading-percent {
+  margin-top:12px;
+  color:#ffdb7d;
+  font-weight:bold;
+}
+#toast {
+  display:none;
+  position:fixed;
+  bottom:95px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#155443;
+  border:1px solid #49d8b5;
+  padding:12px 18px;
+  border-radius:12px;
+  z-index:80;
+  text-align:center;
+  max-width:90%;
+}
+@media(max-width:750px) {
+  .container {width:94%;margin:12px auto}
+  .topbar {padding:0 4%;height:58px}
+  .logo {font-size:22px}
+  .profile {padding:14px}
+  .balance-row {align-items:flex-start;flex-direction:column}
+  .balance-number {font-size:23px}
+  .money-actions {width:100%}
+  .money-actions button {flex:1}
+  .banner {height:150px;margin:13px 0 20px}
+  .banner-fallback h1 {font-size:23px}
+  .games {grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .game {min-height:175px;padding:13px 10px}
+  .game h3 {font-size:15px}
+  .game-icon {font-size:34px}
+  .section-title h2 {font-size:18px}
+  .utilities {grid-template-columns:repeat(3,1fr);gap:8px}
+  .utility {padding:13px 5px}
+}
+@media(min-width:751px) {
+  .container {margin-top:22px}
 }
 </style>
 </head>
+
 <body>
 
-<header>
- <div class="logo">B59CLUB</div>
- <div class="header-right">
-  <span id="headerUser" style="font-size:12px;color:#bce6d8"></span>
-  <button id="authButton" onclick="openAuth()">Đăng nhập</button>
- </div>
+<header class="topbar">
+  <div class="logo">B59CLUB</div>
+  <div class="account">
+    <span id="hello">Xin chào, Khách</span>
+    <button class="small-btn" id="accountButton" onclick="openAccount()">Tài khoản</button>
+  </div>
 </header>
 
-<div class="wrap">
- <section class="welcome">
-  <h1>CHÀO MỪNG ĐẾN B59CLUB</h1>
-  <p>Sảnh trò chơi giải trí tổng hợp. Chọn trò chơi yêu thích và trải nghiệm phiên bản mô phỏng bằng xu ảo.</p>
-  <div class="balance">
-   <span>💰 Số dư của bạn</span>
-   <strong id="balance">0 xu</strong>
+<main class="container">
+
+  <!-- THÔNG TIN NHÂN VẬT -->
+  <section class="profile">
+    <div class="character">
+      <div class="avatar">👤</div>
+      <div>
+        <div class="character-name" id="characterName">Khách</div>
+        <div class="character-sub">Thành viên B59CLUB</div>
+      </div>
+    </div>
+
+    <!-- VIP RIÊNG -->
+    <div class="vip-row">
+      <div>
+        <div class="vip-label">👑 VIP MEMBER</div>
+        <small style="color:#b8d4ca">Cấp VIP: <span id="vipLevel">VIP 0</span></small>
+      </div>
+      <button class="vip-button" onclick="openVip()">NÂNG VIP</button>
+    </div>
+
+    <!-- SỐ DƯ VÀ NẠP RÚT -->
+    <div class="balance-row">
+      <div class="balance-info">
+        <small>💰 SỐ DƯ XU ẢO CỦA BẠN</small>
+        <div class="balance-number" id="balance">1.000.000 xu</div>
+      </div>
+      <div class="money-actions">
+        <button onclick="openMoney('deposit')">＋ NẠP</button>
+        <button class="withdraw" onclick="openMoney('withdraw')">－ RÚT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER TỰ THAY ẢNH -->
+  <section class="banner">
+    <img src="banner.jpg" alt="Banner B59CLUB"
+      onerror="this.style.display='none';document.getElementById('bannerFallback').style.display='block'">
+    <div class="banner-fallback" id="bannerFallback" style="display:none">
+      <h1>B59CLUB - SẢNH GIẢI TRÍ</h1>
+      <p>Chào mừng bạn đến với thế giới giải trí</p>
+    </div>
+  </section>
+
+  <!-- DANH SÁCH GAME -->
+  <div class="section-title">
+    <h2>🎮 TRÒ CHƠI NỔI BẬT</h2>
+    <span>10 TRÒ CHƠI</span>
   </div>
- </section>
 
- <!-- Thay banner.jpg bằng ảnh banner bạn tự thiết kế -->
- <div class="banner">
-  <div class="banner-fallback" id="bannerFallback">B59CLUB · SẢNH GIẢI TRÍ</div>
-  <img src="banner.jpg" alt="Banner B59CLUB"
-       onload="document.getElementById('bannerFallback').style.display='none'"
-       onerror="this.style.display='none'">
- </div>
+  <section class="games">
 
- <div class="section-title">
-  <h2>🎮 TRÒ CHƠI NỔI BẬT</h2>
-  <span>10 TRÒ CHƠI</span>
- </div>
+    <article class="game active">
+      <div class="game-icon">🎲</div>
+      <h3>TÀI XỈU</h3>
+      <p>Ba xúc xắc · Phiên nhanh</p>
+      <button onclick="enterGame('taixiu.html')">CHƠI NGAY →</button>
+    </article>
 
- <section class="games">
-  <article class="game active">
-   <div class="emoji">🎲</div>
-   <h3>TÀI XỈU</h3>
-   <p>Ba xúc xắc · Phiên nhanh</p>
-   <button onclick="enterGame('index.html')">CHƠI NGAY →</button>
-  </article>
+    <article class="game active">
+      <div class="game-icon">🥣</div>
+      <h3>XÓC ĐĨA</h3>
+      <p>Bốn quân đỏ trắng · Mô phỏng</p>
+      <button onclick="enterGame('xocdia.html')">CHƠI NGAY →</button>
+    </article>
 
-  <article class="game active">
-   <div class="emoji">🥣</div>
-   <h3>XÓC ĐĨA</h3>
-   <p>Bốn quân đỏ trắng · Mô phỏng</p>
-   <button onclick="enterGame('xocdia.html')">CHƠI NGAY →</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🦀</div>
+      <h3>BẦU CUA</h3>
+      <p>Trò chơi dân gian mô phỏng</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🦀</div>
-   <h3>BẦU CUA</h3>
-   <p>Trò chơi dân gian mô phỏng</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🀄</div>
+      <h3>ĐƯỜNG MẠT CHƯỢC</h3>
+      <p>Trò chơi giải trí</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🀄</div>
-   <h3>ĐƯỜNG MẠT CHƯỢC</h3>
-   <p>Trò chơi giải trí</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🎡</div>
+      <h3>VÒNG QUAY MAY MẮN</h3>
+      <p>Vòng quay xu ảo</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🎡</div>
-   <h3>VÒNG QUAY MAY MẮN</h3>
-   <p>Vòng quay xu ảo</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🃏</div>
+      <h3>POKER</h3>
+      <p>Trải nghiệm bài mô phỏng</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🎯</div>
-   <h3>BẮN CÁ</h3>
-   <p>Trò chơi bắn cá mô phỏng</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">♠️</div>
+      <h3>BLACKJACK</h3>
+      <p>Trò chơi bài mô phỏng</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">♠️</div>
-   <h3>POKER</h3>
-   <p>Trò chơi bài mô phỏng</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🎯</div>
+      <h3>BẮN CÁ</h3>
+      <p>Thế giới đại dương</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🎰</div>
-   <h3>SLOT GAME</h3>
-   <p>Máy quay thưởng xu ảo</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🎰</div>
+      <h3>SLOT GAME</h3>
+      <p>Máy quay giải trí</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🃏</div>
-   <h3>BA CÂY</h3>
-   <p>Trò chơi bài mô phỏng</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
+    <article class="game">
+      <div class="game-icon">🏆</div>
+      <h3>JACKPOT</h3>
+      <p>Vòng quay phần thưởng demo</p>
+      <button class="disabled" onclick="comingSoon()">SẮP RA MẮT</button>
+    </article>
 
-  <article class="game">
-   <div class="emoji">🎴</div>
-   <h3>TIẾN LÊN</h3>
-   <p>Trò chơi bài mô phỏng</p>
-   <button disabled>SẮP RA MẮT</button>
-  </article>
- </section>
+  </section>
 
- <div class="section-title">
-  <h2>✨ TIỆN ÍCH</h2>
-  <span>B59CLUB</span>
- </div>
- <section class="utilities">
-  <div class="utility">↩️<b>Hoàn trả</b><small>Đang cập nhật</small></div>
-  <div class="utility">🎁<b>Khuyến mãi</b><small>Đang cập nhật</small></div>
-  <div class="utility">🎧<b>CSKH</b><small>Hỗ trợ demo</small></div>
- </section>
-</div>
+  <!-- TIỆN ÍCH -->
+  <div class="section-title">
+    <h2>✨ TIỆN ÍCH</h2>
+    <span>DEMO</span>
+  </div>
 
-<footer>B59CLUB · Phiên bản trò chơi mô phỏng bằng xu ảo</footer>
+  <section class="utilities">
+    <div class="utility" onclick="showUtility('Hoàn trả')">
+      <div class="u-icon">↩️</div>
+      <h3>Hoàn trả</h3>
+      <p>Lịch sử hoàn trả demo</p>
+    </div>
+    <div class="utility" onclick="showUtility('Khuyến mãi')">
+      <div class="u-icon">🎁</div>
+      <h3>Khuyến mãi</h3>
+      <p>Ưu đãi thành viên</p>
+    </div>
+    <div class="utility" onclick="showUtility('Chăm sóc khách hàng')">
+      <div class="u-icon">🎧</div>
+      <h3>CSKH</h3>
+      <p>Trung tâm hỗ trợ</p>
+    </div>
+  </section>
 
-<nav class="bottom">
- <button onclick="window.scrollTo({top:0,behavior:'smooth'})"><span>⌂</span>Trang chủ</button>
- <button onclick="toast('Tính năng đang cập nhật')"><span>↩️</span>Hoàn trả</button>
- <button onclick="toast('Tính năng đang cập nhật')"><span>🎁</span>Khuyến mãi</button>
- <button onclick="toast('Tính năng đang cập nhật')"><span>♙</span>Tài khoản</button>
+</main>
+
+<!-- THANH ĐIỀU HƯỚNG CỐ ĐỊNH -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="goHome()">
+    <span class="nav-icon">⌂</span>
+    <span>Trang chủ</span>
+  </button>
+  <button class="nav-item" onclick="showUtility('Hoàn trả')">
+    <span class="nav-icon">↩️</span>
+    <span>Hoàn trả</span>
+  </button>
+  <button class="nav-item" onclick="showUtility('Khuyến mãi')">
+    <span class="nav-icon">🎁</span>
+    <span>Khuyến mãi</span>
+  </button>
+  <button class="nav-item" onclick="openAccount()">
+    <span class="nav-icon">♙</span>
+    <span>Tôi</span>
+  </button>
 </nav>
 
-<!-- ĐĂNG NHẬP / ĐĂNG KÝ -->
-<div class="modal" id="authModal">
- <div class="modal-box">
-  <h2 id="authTitle">ĐĂNG NHẬP</h2>
-  <input id="username" placeholder="Tên đăng nhập" autocomplete="username">
-  <input id="password" type="password" placeholder="Mật khẩu" autocomplete="current-password">
-  <button onclick="submitAuth()">TIẾP TỤC</button>
-  <button class="secondary" id="switchAuth" onclick="switchAuth()">Chưa có tài khoản? Đăng ký</button>
-  <button class="close" onclick="closeAuth()">ĐÓNG</button>
-  <small>Tài khoản demo được lưu trên trình duyệt hiện tại. Không dùng mật khẩu quan trọng.</small>
- </div>
+<!-- LOADING -->
+<div id="loading">
+  <div class="loading-logo">B59CLUB</div>
+  <div class="loading-track"><div class="loading-fill" id="loadingFill"></div></div>
+  <div class="loading-percent" id="loadingPercent">0%</div>
+  <p style="color:#9bbeb2">Đang tải trò chơi...</p>
 </div>
 
-<!-- MÀN HÌNH LOADING -->
-<div id="loader">
- <div class="load-content">
-  <div class="load-logo">B59CLUB</div>
-  <div>ĐANG TẢI TRÒ CHƠI</div>
-  <div class="load-percent" id="loadPercent">0%</div>
-  <div class="load-track"><div class="load-fill" id="loadFill"></div></div>
-  <div class="load-text" id="loadText">Đang kết nối...</div>
- </div>
+<!-- NẠP / RÚT -->
+<div class="overlay" id="moneyOverlay">
+  <div class="modal">
+    <h2 id="moneyTitle">NẠP XU</h2>
+    <p class="modal-note">Đây là chức năng mô phỏng bằng xu ảo, không thực hiện giao dịch tiền thật.</p>
+    <input id="moneyAmount" type="number" min="1" placeholder="Nhập số xu">
+    <button onclick="confirmMoney()">XÁC NHẬN</button>
+    <button class="close" onclick="closeModal('moneyOverlay')">ĐÓNG</button>
+  </div>
 </div>
 
-<div id="toastBox" style="position:fixed;top:75px;left:50%;transform:translateX(-50%);background:#ffe079;color:#263323;padding:11px 18px;border-radius:20px;font-weight:bold;display:none;z-index:200"></div>
+<!-- VIP -->
+<div class="overlay" id="vipOverlay">
+  <div class="modal">
+    <h2>👑 KHU VỰC VIP</h2>
+    <p>Chào mừng bạn đến khu vực thành viên VIP B59CLUB.</p>
+    <p class="modal-note">VIP 0 · VIP 1 · VIP 2 · VIP 3</p>
+    <button onclick="showToast('Tính năng VIP đang được hoàn thiện')">TÌM HIỂU VIP</button>
+    <button class="close" onclick="closeModal('vipOverlay')">ĐÓNG</button>
+  </div>
+</div>
+
+<!-- TÀI KHOẢN / ĐĂNG NHẬP -->
+<div class="overlay" id="accountOverlay">
+  <div class="modal">
+    <h2 id="authTitle">ĐĂNG NHẬP</h2>
+    <input id="username" placeholder="Tên tài khoản">
+    <input id="password" type="password" placeholder="Mật khẩu">
+    <button onclick="login()">ĐĂNG NHẬP</button>
+    <button class="secondary" onclick="register()">ĐĂNG KÝ TÀI KHOẢN</button>
+    <button class="close" onclick="closeModal('accountOverlay')">ĐÓNG</button>
+    <p class="modal-note">Tài khoản demo được lưu trên trình duyệt hiện tại, chưa có máy chủ bảo mật.</p>
+  </div>
+</div>
+
+<div id="toast"></div>
 
 <script>
-const BALANCE_KEY="b59_balance";
-const USERS_KEY="b59_demo_users";
-const SESSION_KEY="b59_demo_session";
+const BALANCE_KEY = "b59_balance";
+const USER_KEY = "b59_user";
+let moneyMode = "deposit";
 
-let authMode="login";
-let loading=false;
-let loadInterval=null;
-
-function getUsers(){
- try{return JSON.parse(localStorage.getItem(USERS_KEY)||"{}")}
- catch(e){return {}}
-}
-function currentUser(){
- return localStorage.getItem(SESSION_KEY)||"";
-}
-function getBalance(){
- let n=Number(localStorage.getItem(BALANCE_KEY));
- return Number.isFinite(n)&&n>=0?n:1000000;
-}
-function render(){
- const user=currentUser();
- document.getElementById("headerUser").textContent=user?"Xin chào, "+user:"";
- document.getElementById("authButton").textContent=user?"Đăng xuất":"Đăng nhập";
- document.getElementById("balance").textContent=getBalance().toLocaleString("vi-VN")+" xu";
-}
-function openAuth(){
- if(currentUser()){
-  if(confirm("Bạn muốn đăng xuất?")){
-   localStorage.removeItem(SESSION_KEY);
-   render();
-   toast("Đã đăng xuất");
+function getBalance() {
+  let value = Number(localStorage.getItem(BALANCE_KEY));
+  if (!Number.isFinite(value) || value < 0) {
+    value = 1000000;
+    localStorage.setItem(BALANCE_KEY, value);
   }
-  return;
- }
- authMode="login";
- updateAuth();
- document.getElementById("authModal").classList.add("show");
+  return value;
 }
-function closeAuth(){
- document.getElementById("authModal").classList.remove("show");
-}
-function switchAuth(){
- authMode=authMode==="login"?"register":"login";
- updateAuth();
-}
-function updateAuth(){
- document.getElementById("authTitle").textContent=
-  authMode==="login"?"ĐĂNG NHẬP":"ĐĂNG KÝ TÀI KHOẢN";
- document.getElementById("switchAuth").textContent=
-  authMode==="login"?"Chưa có tài khoản? Đăng ký":"Đã có tài khoản? Đăng nhập";
-}
-function submitAuth(){
- const username=document.getElementById("username").value.trim();
- const password=document.getElementById("password").value;
- if(!/^[a-zA-Z0-9_]{3,20}$/.test(username)){
-  toast("Tên tài khoản 3-20 ký tự, không dấu");
-  return;
- }
- if(password.length<4){
-  toast("Mật khẩu cần ít nhất 4 ký tự");
-  return;
- }
- const users=getUsers();
- if(authMode==="register"){
-  if(users[username]){
-   toast("Tên tài khoản đã tồn tại");
-   return;
-  }
-  users[username]=password;
-  localStorage.setItem(USERS_KEY,JSON.stringify(users));
-  if(!localStorage.getItem(BALANCE_KEY)){
-   localStorage.setItem(BALANCE_KEY,"1000000");
-  }
-  toast("Đăng ký thành công! Hãy đăng nhập");
-  authMode="login";
-  updateAuth();
-  document.getElementById("password").value="";
- }else{
-  if(users[username]!==password){
-   toast("Sai tài khoản hoặc mật khẩu");
-   return;
-  }
-  localStorage.setItem(SESSION_KEY,username);
-  closeAuth();
-  render();
-  toast("Đăng nhập thành công");
- }
-}
-function enterGame(url){
- if(!currentUser()){
-  toast("Bạn cần đăng nhập trước");
-  openAuth();
-  return;
- }
- showLoader(url);
-}
-function showLoader(url){
- if(loading)return;
- loading=true;
- let progress=0;
- const loader=document.getElementById("loader");
- loader.classList.add("show");
- document.getElementById("loadPercent").textContent="0%";
- document.getElementById("loadFill").style.width="0%";
- document.getElementById("loadText").textContent="Đang kết nối...";
 
- clearInterval(loadInterval);
- loadInterval=setInterval(()=>{
-  progress+=Math.floor(Math.random()*5)+2;
-  if(progress>100)progress=100;
-  document.getElementById("loadPercent").textContent=progress+"%";
-  document.getElementById("loadFill").style.width=progress+"%";
+function setBalance(value) {
+  localStorage.setItem(BALANCE_KEY, Math.max(0, value));
+  updateBalance();
+}
 
-  if(progress<35)document.getElementById("loadText").textContent="Đang kết nối...";
-  else if(progress<70)document.getElementById("loadText").textContent="Đang tải dữ liệu...";
-  else document.getElementById("loadText").textContent="Đang hoàn tất...";
+function updateBalance() {
+  document.getElementById("balance").textContent =
+    getBalance().toLocaleString("vi-VN") + " xu";
+}
 
-  if(progress>=100){
-   clearInterval(loadInterval);
-   document.getElementById("loadText").textContent="Hoàn tất!";
-   setTimeout(()=>{
-    if(url)window.location.href=url;
-    else{
-     loader.classList.remove("show");
-     loading=false;
+function updateUser() {
+  const user = localStorage.getItem(USER_KEY);
+  document.getElementById("characterName").textContent = user || "Khách";
+  document.getElementById("hello").textContent =
+    user ? "Xin chào, " + user : "Xin chào, Khách";
+  document.getElementById("accountButton").textContent =
+    user ? "Đăng xuất" : "Đăng nhập";
+}
+
+function openMoney(mode) {
+  moneyMode = mode;
+  document.getElementById("moneyTitle").textContent =
+    mode === "deposit" ? "NẠP XU ẢO" : "RÚT XU ẢO";
+  document.getElementById("moneyAmount").value = "";
+  document.getElementById("moneyOverlay").style.display = "flex";
+}
+
+function confirmMoney() {
+  const amount = Number(document.getElementById("moneyAmount").value);
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    showToast("Vui lòng nhập số xu hợp lệ");
+    return;
+  }
+
+  if (moneyMode === "deposit") {
+    setBalance(getBalance() + amount);
+    showToast("Đã cộng +" + amount.toLocaleString("vi-VN") + " xu ảo");
+  } else {
+    if (amount > getBalance()) {
+      showToast("Số dư không đủ để thực hiện");
+      return;
     }
-   },250);
+    setBalance(getBalance() - amount);
+    showToast("Đã trừ -" + amount.toLocaleString("vi-VN") + " xu ảo");
   }
- },65);
-}
-function toast(message){
- const el=document.getElementById("toastBox");
- el.textContent=message;
- el.style.display="block";
- clearTimeout(window.toastTimeout);
- window.toastTimeout=setTimeout(()=>el.style.display="none",2200);
+
+  closeModal("moneyOverlay");
 }
 
-// Khi quay lại sảnh bằng nút Back của trình duyệt
-window.addEventListener("pageshow",function(event){
- render();
- if(event.persisted){
-  loading=false;
-  showLoader(null);
- }
-});
+function openVip() {
+  document.getElementById("vipOverlay").style.display = "flex";
+}
 
-render();
+function openAccount() {
+  if (localStorage.getItem(USER_KEY)) {
+    if (confirm("Bạn có muốn đăng xuất không?")) {
+      localStorage.removeItem(USER_KEY);
+      updateUser();
+      showToast("Đã đăng xuất");
+    }
+    return;
+  }
+  document.getElementById("accountOverlay").style.display = "flex";
+}
+
+function register() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value;
+
+  if (user.length < 3 || pass.length < 4) {
+    showToast("Tên tài khoản tối thiểu 3 ký tự, mật khẩu tối thiểu 4 ký tự");
+    return;
+  }
+
+  let accounts = JSON.parse(localStorage.getItem("b59_accounts") || "{}");
+  if (accounts[user]) {
+    showToast("Tài khoản đã tồn tại");
+    return;
+  }
+
+  accounts[user] = pass;
+  localStorage.setItem("b59_accounts", JSON.stringify(accounts));
+  localStorage.setItem(USER_KEY, user);
+  updateUser();
+  closeModal("accountOverlay");
+  showToast("Đăng ký thành công");
+}
+
+function login() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value;
+  let accounts = JSON.parse(localStorage.getItem("b59_accounts") || "{}");
+
+  if (accounts[user] !== pass) {
+    showToast("Tài khoản hoặc mật khẩu không đúng");
+    return;
+  }
+
+  localStorage.setItem(USER_KEY, user);
+  updateUser();
+  closeModal("accountOverlay");
+  showToast("Đăng nhập thành công");
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+function enterGame(page) {
+  const loading = document.getElementById("loading");
+  const fill = document.getElementById("loadingFill");
+  const percent = document.getElementById("loadingPercent");
+  loading.style.display = "flex";
+
+  let progress = 0;
+  const timer = setInterval(() => {
+    progress += Math.floor(Math.random() * 9) + 5;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(timer);
+      fill.style.width = "100%";
+      percent.textContent = "100%";
+      setTimeout(() => {
+        window.location.href = page;
+      }, 250);
+      return;
+    }
+    fill.style.width = progress + "%";
+    percent.textContent = progress + "%";
+  }, 100);
+}
+
+function goHome() {
+  window.scrollTo({top:0,behavior:"smooth"});
+  document.querySelectorAll(".nav-item").forEach(x => x.classList.remove("active"));
+  document.querySelector(".nav-item").classList.add("active");
+}
+
+function showUtility(name) {
+  showToast(name + " đang được hoàn thiện");
+}
+
+function comingSoon() {
+  showToast("Trò chơi đang được phát triển");
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.style.display = "none";
+  }, 2600);
+}
+
+updateBalance();
+updateUser();
 </script>
+
 </body>
 </html>
