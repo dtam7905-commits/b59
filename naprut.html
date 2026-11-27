@@ -295,6 +295,13 @@ function withdraw() {
 }
 
 updateBalance();
+  const tab = new URLSearchParams(location.search).get("tab");
+
+if (tab === "withdraw") {
+  showTab("withdraw");
+} else {
+  showTab("deposit");
+}
 </script>
 </body>
 </html>
