@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071c18">
+<title>B59CLUB - Admin</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:20px;background:#071c18;color:white;
+ font-family:Arial,sans-serif
+}
+.container{max-width:500px;margin:25px auto}
+h1{color:#65eac8;text-align:center}
+.card{
+ background:#10392f;border:1px solid #397d69;
+ border-radius:18px;padding:20px;margin:15px 0
+}
+input{
+ width:100%;padding:14px;margin:8px 0;
+ background:#06251e;color:white;
+ border:1px solid #438b75;border-radius:10px;
+ font-size:16px
+}
+button{
+ width:100%;padding:14px;margin-top:9px;
+ border:0;border-radius:10px;
+ background:#43d6b2;color:#05372d;
+ font-weight:bold;font-size:15px
+}
+button.danger{background:#a83d46;color:white}
+button.dark{background:#34594e;color:white}
+.balance{
+ color:#ffdf83;font-size:28px;
+ font-weight:bold;text-align:center;margin:15px 0
+}
+.small{color:#a8c9bd;font-size:13px;line-height:1.5}
+#dashboard{display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>⚙️ B59CLUB ADMIN</h1>
+
+<div class="card" id="login">
+ <h2>Đăng nhập quản trị</h2>
+ <input id="password" type="password" placeholder="Mật khẩu Admin">
+ <button onclick="loginAdmin()">ĐĂNG NHẬP</button>
+ <p class="small">Trang quản trị demo xu ảo.</p>
+</div>
+
+<div id="dashboard">
+ <div class="card">
+  <h2>💰 Tổng số dư hiện tại</h2>
+  <div class="balance" id="balance">0 xu</div>
+  <button class="dark" onclick="refresh()">LÀM MỚI</button>
+ </div>
+
+ <div class="card">
+  <h2>＋ Cộng xu</h2>
+  <input id="addAmount" type="number" min="1" placeholder="Nhập số xu muốn cộng">
+  <button onclick="changeBalance('add')">XÁC NHẬN CỘNG XU</button>
+ </div>
+
+ <div class="card">
+  <h2>－ Trừ xu</h2>
+  <input id="subtractAmount" type="number" min="1" placeholder="Nhập số xu muốn trừ">
+  <button class="danger" onclick="changeBalance('subtract')">XÁC NHẬN TRỪ XU</button>
+ </div>
+
+ <div class="card">
+  <h2>Đặt lại số dư</h2>
+  <p class="small">Đưa số dư demo về 1.000.000 xu.</p>
+  <button class="dark" onclick="resetBalance()">ĐẶT LẠI SỐ DƯ</button>
+ </div>
+
+ <div class="card">
+  <h2>📋 Lịch sử thao tác</h2>
+  <div id="history" class="small">Chưa có thao tác.</div>
+ </div>
+
+ <button class="dark" onclick="logout()">ĐĂNG XUẤT</button>
+</div>
+</div>
+
+<script>
+const KEY='b59_balance';
+const ADMIN_PASSWORD='B59ADMIN2026';
+const HISTORY_KEY='b59_admin_history';
+
+function getBalance(){
+ return Number(localStorage.getItem(KEY) ?? 1000000);
+}
+
+function money(n){
+ return Number(n).toLocaleString('vi-VN')+' xu';
+}
+
+function loginAdmin(){
+ const p=document.getElementById('password').value;
+ if(p!==ADMIN_PASSWORD){
+  alert('Mật khẩu không chính xác!');
+  return;
+ }
+ document.getElementById('login').style.display='none';
+ document.getElementById('dashboard').style.display='block';
+ refresh();
+}
+
+function refresh(){
+ document.getElementById('balance').textContent=money(getBalance());
+ showHistory();
+}
+
+function saveHistory(action,amount){
+ let list=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
+ list.unshift({
+  action:action,
+  amount:amount,
+  time:new Date().toLocaleString('vi-VN')
+ });
+ localStorage.setItem(HISTORY_KEY,JSON.stringify(list.slice(0,30)));
+ showHistory();
+}
+
+function showHistory(){
+ let list=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
+ document.getElementById('history').innerHTML=list.length
+ ?list.map(x=>'<p>'+x.time+'<br>'+x.action+': <b>'+money(x.amount)+'</b></p>').join('')
+ :'Chưa có thao tác.';
+}
+
+function changeBalance(type){
+ let id=type==='add'?'addAmount':'subtractAmount';
+ let amount=Number(document.getElementById(id).value);
+ let current=getBalance();
+
+ if(!Number.isSafeInteger(amount)||amount<=0){
+  alert('Nhập số xu hợp lệ!');
+  return;
+ }
+
+ if(type==='add'){
+  if(amount>Number.MAX_SAFE_INTEGER-current){
+   alert('Số xu vượt giới hạn!');
+   return;
+  }
+  localStorage.setItem(KEY,String(current+amount));
+  saveHistory('Admin cộng xu',amount);
+ }else{
+  if(amount>current){
+   alert('Số dư không đủ!');
+   return;
+  }
+  localStorage.setItem(KEY,String(current-amount));
+  saveHistory('Admin trừ xu',amount);
+ }
+
+ document.getElementById(id).value='';
+ refresh();
+ alert('Đã cập nhật số dư demo!');
+}
+
+function resetBalance(){
+ if(!confirm('Bạn muốn đặt lại số dư về 1.000.000 xu?'))return;
+ localStorage.setItem(KEY,'1000000');
+ saveHistory('Admin đặt lại số dư',1000000);
+ refresh();
+}
+
+function logout(){
+ document.getElementById('dashboard').style.display='none';
+ document.getElementById('login').style.display='block';
+ document.getElementById('password').value='';
+}
+</script>
+</body>
+</html>
