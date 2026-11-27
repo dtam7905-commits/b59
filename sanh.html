@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B59CLUB - Sảnh trò chơi</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:linear-gradient(145deg,#031714,#062b25);
+ color:#effffb;
+ font-family:Arial,sans-serif;
+ padding-bottom:100px;
+}
+header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:17px 20px;
+ background:#06231f;
+ border-bottom:1px solid #23685d;
+}
+.logo{
+ color:#55e7c6;
+ font-size:25px;
+ font-weight:900;
+}
+.header-btn{
+ border:1px solid #347e70;
+ padding:9px 13px;
+ border-radius:9px;
+ color:#d5fff3;
+ background:#103e34;
+}
+.container{
+ max-width:850px;
+ margin:auto;
+ padding:20px 18px;
+}
+.welcome{
+ background:linear-gradient(120deg,#124c40,#0b302b);
+ border:1px solid #369b83;
+ border-radius:22px;
+ padding:25px;
+ margin-bottom:35px;
+}
+.welcome h2{
+ margin:0 0 10px;
+ color:#6bf0d0;
+ font-size:25px;
+}
+.welcome p{
+ color:#b4d4cb;
+ line-height:1.6;
+ margin-bottom:0;
+}
+.balance{
+ margin-top:18px;
+ padding:13px;
+ background:#062720;
+ border-radius:12px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.balance strong{
+ color:#ffe18b;
+ font-size:21px;
+}
+.section-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:25px 4px 17px;
+}
+.section-title h2{
+ font-size:21px;
+ margin:0;
+}
+.section-title span{
+ color:#4ee5c3;
+}
+.games{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:15px;
+}
+.game{
+ background:linear-gradient(145deg,#12453a,#092b26);
+ border:2px solid #24695d;
+ border-radius:25px;
+ padding:22px 18px;
+ min-height:235px;
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+}
+.game.active{
+ border-color:#49e1c0;
+}
+.game-icon{
+ font-size:59px;
+ margin:5px 0 20px;
+}
+.game h3{
+ font-size:22px;
+ margin:0 0 9px;
+}
+.game p{
+ color:#a7c5bc;
+ margin:0 0 20px;
+ font-size:15px;
+}
+.play{
+ display:inline-block;
+ text-decoration:none;
+ border:0;
+ background:#1c6b5b;
+ color:#dffff7;
+ border-radius:30px;
+ padding:13px 20px;
+ font-size:15px;
+ font-weight:bold;
+ margin-top:auto;
+}
+.play.ready{
+ background:linear-gradient(100deg,#22c9a7,#7af0d4);
+ color:#04332b;
+}
+.play:active{transform:scale(.96)}
+.tools{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+}
+.tool{
+ border:1px solid #286b5d;
+ background:#103a31;
+ border-radius:20px;
+ color:white;
+ padding:17px 5px;
+ text-align:center;
+ min-height:110px;
+ font-size:14px;
+}
+.tool div{
+ font-size:30px;
+ margin-bottom:9px;
+}
+.tool:active{background:#1a594a}
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:#041e1b;
+ border-top:1px solid #28665a;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ padding:12px 3px 17px;
+ z-index:10;
+}
+.nav{
+ background:none;
+ border:0;
+ color:#8eafa5;
+ font-size:13px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:7px;
+}
+.nav span{font-size:25px}
+.nav.active{color:#40e5c1}
+.modal-bg{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000b;
+ z-index:20;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+.modal{
+ width:100%;
+ max-width:420px;
+ background:#103a33;
+ border:2px solid #3a9a83;
+ border-radius:23px;
+ padding:25px;
+ text-align:center;
+}
+.modal h2{color:#68f0d1;margin-top:0}
+.modal p{color:#b6d6cc;line-height:1.6}
+.modal button{
+ width:100%;
+ padding:15px;
+ border:0;
+ border-radius:12px;
+ background:#1e6456;
+ color:white;
+ font-size:17px;
+ font-weight:bold;
+ margin-top:10px;
+}
+.modal input{
+ width:100%;
+ padding:13px;
+ border-radius:10px;
+ border:1px solid #478b7c;
+ background:#062820;
+ color:white;
+ margin:8px 0;
+}
+.footer{
+ text-align:center;
+ color:#648b80;
+ font-size:12px;
+ margin:25px 0;
+}
+@media(max-width:390px){
+ .game{padding:17px 13px}
+ .game h3{font-size:19px}
+ .game-icon{font-size:50px}
+ .game p{font-size:13px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">B59CLUB</div>
+ <button class="header-btn" onclick="openModal('Tài khoản','Đây là sảnh trò chơi mô phỏng B59CLUB.')">👤 Tài khoản</button>
+</header>
+
+<main class="container">
+
+<section class="welcome">
+ <h2>CHÀO MỪNG ĐẾN B59CLUB</h2>
+ <p>SẢNH GIẢI TRÍ TỔNG HỢP</p>
+ <p>Chọn trò chơi yêu thích và trải nghiệm phiên bản mô phỏng bằng xu ảo.</p>
+
+ <div class="balance">
+  <span>💰 Số dư của bạn</span>
+  <strong id="balance">1.000.000 xu</strong>
+ </div>
+</section>
+
+<div class="section-title">
+ <h2>🎮 TRÒ CHƠI NỔI BẬT</h2>
+ <span>5 TRÒ CHƠI</span>
+</div>
+
+<section class="games">
+
+ <article class="game active">
+  <div class="game-icon">🎲</div>
+  <h3>TÀI XỈU</h3>
+  <p>Ba xúc xắc · Phiên nhanh</p>
+  <a class="play ready" href="index.html">CHƠI NGAY →</a>
+ </article>
+
+ <article class="game active">
+  <div class="game-icon">🥣</div>
+  <h3>XÓC ĐĨA</h3>
+  <p>Trải nghiệm mô phỏng</p>
+  <a class="play ready" href="xocdia.html">CHƠI NGAY →</a>
+ </article>
+
+ <article class="game">
+  <div class="game-icon">🦀</div>
+  <h3>BẦU CUA</h3>
+  <p>Lắc xúc xắc hình</p>
+  <button class="play" onclick="openModal('Bầu Cua','Game Bầu Cua đang được phát triển.')">SẮP RA MẮT</button>
+ </article>
+
+ <article class="game">
+  <div class="game-icon">🀄</div>
+  <h3>ĐƯỜNG MẠT CHƯỢC</h3>
+  <p>Phong cách mạt chược</p>
+  <button class="play" onclick="openModal('Đường Mạt Chược','Game đang được phát triển.')">SẮP RA MẮT</button>
+ </article>
+
+ <article class="game">
+  <div class="game-icon">🎡</div>
+  <h3>VÒNG QUAY MAY MẮN</h3>
+  <p>Quay thưởng xu ảo</p>
+  <button class="play" onclick="openModal('Vòng Quay','Tính năng đang được phát triển.')">SẮP RA MẮT</button>
+ </article>
+
+</section>
+
+<div class="section-title">
+ <h2>✨ TIỆN ÍCH</h2>
+ <span>DEMO</span>
+</div>
+
+<section class="tools">
+ <button class="tool" onclick="openModal('Hoàn trả','Tính năng hoàn trả xu đang được phát triển.')">
+  <div>↩️</div>Hoàn trả
+ </button>
+ <button class="tool" onclick="openModal('Khuyến mãi','Hiện chưa có chương trình khuyến mãi.')">
+  <div>🎁</div>Khuyến mãi
+ </button>
+ <button class="tool" onclick="openModal('Chăm sóc khách hàng','Đây là phiên bản demo, chưa kết nối nhân viên hỗ trợ.')">
+  <div>🎧</div>CSKH
+ </button>
+</section>
+
+<div class="footer">
+ B59CLUB · Phiên bản giải trí mô phỏng bằng xu ảo
+</div>
+
+</main>
+
+<nav class="bottom">
+ <button class="nav active" onclick="navAction(this,'Trang chủ','Bạn đang ở trang chủ.')">
+  <span>⌂</span>Trang chủ
+ </button>
+ <button class="nav" onclick="navAction(this,'Hoàn trả','Tính năng đang được phát triển.')">
+  <span>↩️</span>Hoàn trả
+ </button>
+ <button class="nav" onclick="navAction(this,'Khuyến mãi','Hiện chưa có chương trình khuyến mãi.')">
+  <span>🎁</span>Khuyến mãi
+ </button>
+ <button class="nav" onclick="navAction(this,'CSKH','Chưa kết nối nhân viên hỗ trợ.')">
+  <span>🎧</span>CSKH
+ </button>
+ <button class="nav" onclick="navAction(this,'Tôi','Đây là tài khoản demo trên thiết bị này.')">
+  <span>♙</span>Tôi
+ </button>
+</nav>
+
+<div class="modal-bg" id="modalBg" onclick="closeOutside(event)">
+ <div class="modal">
+  <h2 id="modalTitle">Thông báo</h2>
+  <p id="modalText"></p>
+  <button onclick="closeModal()">ĐÓNG</button>
+ </div>
+</div>
+
+<script>
+const BALANCE_KEY='b59_balance';
+
+function updateBalance(){
+ let value=localStorage.getItem(BALANCE_KEY);
+ if(value===null){
+  value='1000000';
+  localStorage.setItem(BALANCE_KEY,value);
+ }
+ let amount=Number(value);
+ document.getElementById('balance').textContent=
+  amount.toLocaleString('vi-VN')+' xu';
+}
+
+function openModal(title,message){
+ document.getElementById('modalTitle').textContent=title;
+ document.getElementById('modalText').textContent=message;
+ document.getElementById('modalBg').style.display='flex';
+}
+
+function closeModal(){
+ document.getElementById('modalBg').style.display='none';
+}
+
+function closeOutside(event){
+ if(event.target.id==='modalBg')closeModal();
+}
+
+function navAction(button,title,message){
+ document.querySelectorAll('.nav').forEach(item=>{
+  item.classList.remove('active');
+ });
+ button.classList.add('active');
+ if(title!=='Trang chủ')openModal(title,message);
+}
+
+window.addEventListener('storage',updateBalance);
+window.addEventListener('pageshow',updateBalance);
+updateBalance();
+</script>
+
+</body>
+</html>
