@@ -447,18 +447,25 @@ button {cursor:pointer;font-family:inherit}
       <button class="vip-button" onclick="openVip()">NÂNG VIP</button>
     </div>
 
-    <!-- SỐ DƯ VÀ NẠP RÚT -->
-    <div class="balance-row">
-      <div class="balance-info">
-        <small>💰 SỐ DƯ XU ẢO CỦA BẠN</small>
-        <div class="balance-number" id="balance">1.000.000 xu</div>
-      </div>
-      <div class="money-actions">
-        <button onclick="openMoney('deposit')">＋ NẠP</button>
-        <button class="withdraw" onclick="openMoney('withdraw')">－ RÚT</button>
-      </div>
-    </div>
-  </section>
+<!-- SỐ DƯ VÀ NẠP RÚT -->
+<div class="balance-row">
+  <div class="balance-info">
+    <small>💰 SỐ DƯ XU ẢO CỦA BẠN</small>
+    <div class="balance-number" id="balance">1.000.000 xu</div>
+  </div>
+
+  <div class="money-actions">
+    <button onclick="location.href='naprut.html?tab=deposit'">
+      ＋ NẠP
+    </button>
+
+    <button class="withdraw"
+      onclick="location.href='naprut.html?tab=withdraw'">
+      － RÚT
+    </button>
+  </div>
+</div>
+</section>
 
   <!-- BANNER TỰ THAY ẢNH -->
   <section class="banner">
