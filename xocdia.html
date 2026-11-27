@@ -7,111 +7,122 @@
 <title>B59CLUB - Xóc Đĩa</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090b0b;color:white;font-family:Arial,sans-serif}
-button{cursor:pointer;font-family:inherit}
-header{height:52px;background:#101d19;border-bottom:1px solid #72552b;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
-.logo{font-size:20px;font-weight:900;color:#f7d36d}
-header a{color:white;text-decoration:none;font-size:12px;background:#263e35;padding:9px 12px;border-radius:20px}
-.page{max-width:1050px;margin:auto;padding:12px}
-.topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.topline small{color:#b6a47b;font-size:11px}
-.balance{background:#25180f;border:1px solid #a17a37;border-radius:20px;padding:8px 13px;color:#ffe18a;font-weight:bold;font-size:13px}
-.game{position:relative;overflow:hidden;border:2px solid #c99a3c;border-radius:24px;background:radial-gradient(ellipse at center,#8d101b 0%,#570610 58%,#270308 100%);padding:12px;box-shadow:0 0 25px #a51a1a55}
-.game:before{content:"";position:absolute;inset:0;opacity:.15;pointer-events:none;background:repeating-linear-gradient(45deg,transparent 0 5px,#ffb34b 6px,transparent 8px 13px)}
-.game>*{position:relative}
-.topgame{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:8px;align-items:center}
-.players{text-align:center;background:#4c111a;border:1px solid #d9a447;border-radius:13px;padding:8px 3px}
-.players strong{display:block;color:#ffe17e;font-size:21px}
-.players small{font-size:9px;color:#ffdbb2}
-.road{background:#253b40;border:1px solid #82999a;border-radius:9px;padding:6px}
-.road-title{font-size:10px;text-align:center;color:#fff0bf;margin-bottom:5px}
+body{margin:0;background:#080d0c;color:white;font-family:Arial,sans-serif}
+button,a{font-family:inherit;cursor:pointer}
+header{height:58px;background:#071e1b;border-bottom:1px solid #98702d;display:flex;align-items:center;justify-content:space-between;padding:0 15px}
+.logo{font-size:22px;font-weight:900;color:#4ce4c4}
+.back{background:#17685b;color:white;text-decoration:none;padding:10px 14px;border-radius:20px;font-size:13px;font-weight:bold}
+.page{width:100%;max-width:1100px;margin:auto;padding:12px}
+.topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:5px}
+.topline small{font-size:12px;color:#dfc99b}
+.balance{background:#271b0e;border:1px solid #b18b3f;border-radius:20px;padding:9px 13px;color:#ffe17d;font-size:13px;font-weight:bold}
+.game{position:relative;overflow:hidden;border:2px solid #c99a3c;border-radius:20px;background:radial-gradient(ellipse at center,#8e111d,#520710 65%,#270308);padding:14px;box-shadow:0 0 25px #a51a1a44}
+.topgame{display:grid;grid-template-columns:.8fr 1.4fr 1fr;gap:9px;align-items:center}
+.players{text-align:center;background:#4c111a;border:1px solid #d9a447;border-radius:12px;padding:10px 3px}
+.players strong{display:block;color:#ffe17e;font-size:22px}
+.players small{font-size:10px;color:#ffdbb2}
+.road{background:#253b40;border:1px solid #82999a;border-radius:9px;padding:7px}
+.road-title{text-align:center;color:#fff0bf;font-size:10px;margin-bottom:5px}
 .road-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
 .road-dot{width:100%;aspect-ratio:1;border-radius:50%;background:#eee}
 .road-dot.red{background:#111}
-.bowlbox{text-align:center}
-.bowl{font-size:68px;line-height:1.2;display:inline-block;filter:drop-shadow(0 7px 5px #0009)}
-.bowl.moving{animation:shake .12s infinite}
-@keyframes shake{0%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}100%{transform:rotate(-10deg)}}
-.jackpot{text-align:center;background:linear-gradient(#a87930,#351309);border:2px solid #e9c16c;border-radius:9px;padding:8px 3px;box-shadow:0 0 12px #ffbd4a66}
-.jackpot b{display:block;color:#ffe77b;font-size:clamp(13px,3vw,22px);text-shadow:0 2px 4px #000}
-.jackpot small{font-size:10px;color:#fff0b8}
+.jackpot{text-align:center;background:linear-gradient(#a87930,#351309);border:2px solid #e9c16c;border-radius:9px;padding:9px 3px}
+.jackpot small{font-size:11px;color:#fff0b8}
+.jackpot b{display:block;color:#ffe77b;font-size:clamp(13px,2vw,22px)}
 .jackpot .amount{font-size:9px;color:#fff}
-.resultbox{text-align:center;margin:10px auto 12px}
-.resultbox small{font-size:10px;color:#ffdda1}
-.dice{display:flex;justify-content:center;gap:7px;margin:7px}
-.die{width:34px;height:34px;border-radius:8px;background:#f4f0df;color:#a00000;border:2px solid #c8bda2;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:bold;box-shadow:0 3px 5px #0008}
-.result{font-size:19px;font-weight:900;color:#ffe178;text-shadow:0 2px 3px #000}
-.resultdesc{font-size:10px;color:#ffe1c1;margin-top:3px}
-.board{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.door{position:relative;min-width:0;min-height:94px;border:1px solid #f2bb58;border-radius:9px;background:linear-gradient(145deg,#7c1119,#30040a);padding:8px 4px;text-align:center;box-shadow:inset 0 0 15px #ed4c3433}
+.resultbox{text-align:center;margin:12px auto}
+.resultbox small{font-size:11px;color:#ffdda1}
+.covered-stage{height:112px;position:relative;display:flex;justify-content:center;align-items:center}
+.dice{position:absolute;display:flex;justify-content:center;gap:8px}
+.die{width:clamp(29px,4vw,42px);height:clamp(29px,4vw,42px);border-radius:8px;background:#f4f0df;color:#a00000;border:2px solid #c8bda2;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:bold;box-shadow:0 3px 5px #0008}
+.red-piece{background:#d8202c;color:white;border-color:#ff9a9a}
+.white-piece{background:#f4f0df;color:#333;border-color:white}
+.bowl-cover{position:absolute;z-index:2;font-size:75px;filter:drop-shadow(0 7px 5px #0009);transition:transform .65s,opacity .65s}
+.bowl-cover.shake{animation:shake .12s infinite}
+.bowl-cover.open{transform:translateY(-100px) scale(.7);opacity:0;pointer-events:none}
+@keyframes shake{0%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}100%{transform:rotate(-9deg)}}
+.result{font-size:20px;font-weight:900;color:#ffe178}
+.resultdesc{font-size:11px;color:#ffe1c1;margin-top:4px}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.door{min-width:0;min-height:105px;border:1px solid #f2bb58;border-radius:10px;background:linear-gradient(145deg,#7c1119,#30040a);padding:9px 4px;text-align:center;box-shadow:inset 0 0 15px #ed4c3433}
 .door.center{background:linear-gradient(145deg,#e5d7c6,#a7a1a0);color:#29100b}
-.door.wide{grid-column:span 3;min-height:70px}
+.door.wide{grid-column:span 3;min-height:75px}
 .door.selected{outline:2px solid #fff080;box-shadow:0 0 12px #ffda53}
-.door-name{font-weight:900;font-size:13px;text-shadow:0 2px 3px #0008}
-.door.center .door-name{color:#48100a;text-shadow:none}
-.door-desc{font-size:9px;margin-top:4px;color:#ffdbb3}
+.door-name{font-weight:900;font-size:clamp(11px,1.4vw,16px)}
+.door.center .door-name{color:#48100a}
+.door-desc{font-size:10px;margin:5px 0;color:#ffdbb3}
 .door.center .door-desc{color:#542c20}
-.pile{font-size:21px;min-height:28px;margin:3px 0}
 .door-total{font-size:10px;color:#ffe27d;font-weight:bold}
 .door.center .door-total{color:#5c2116}
-.door button{border:0;background:#e6b94e;color:#45120a;font-size:10px;font-weight:900;border-radius:15px;padding:6px 10px;margin-top:5px}
-.door button:disabled{opacity:.4}
-.timebox{margin:12px auto 10px;max-width:490px;text-align:center;background:#170707;border:2px solid #e0aa48;border-radius:25px;overflow:hidden;height:35px;position:relative}
+.door button{border:0;background:#e6b94e;color:#45120a;font-size:10px;font-weight:900;border-radius:15px;padding:7px 12px;margin-top:6px}
+.door button:disabled{opacity:.35}
+.timebox{margin:13px auto 10px;max-width:500px;text-align:center;background:#170707;border:2px solid #e0aa48;border-radius:25px;overflow:hidden;height:36px;position:relative}
 .timefill{position:absolute;left:0;top:0;height:100%;width:100%;background:linear-gradient(90deg,#ffb323,#e94717);transition:width .8s}
 .timetext{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;text-shadow:0 2px 4px #000}
-.chips{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;padding:5px 0}
-.chip{width:53px;height:53px;border-radius:50%;border:4px dashed #eee4ca;color:#fff;font-size:12px;font-weight:900;text-shadow:0 2px 3px #000;box-shadow:0 4px 7px #0009}
+.chips{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;padding:6px 0}
+.chip{width:clamp(40px,5vw,55px);height:clamp(40px,5vw,55px);border-radius:50%;border:4px dashed #eee4ca;color:white;font-size:12px;font-weight:900;text-shadow:0 2px 3px #000;box-shadow:0 4px 7px #0009}
 .chip:nth-child(1){background:#087d80}
 .chip:nth-child(2){background:#c19b0a}
 .chip:nth-child(3){background:#b01d22}
 .chip:nth-child(4){background:#6323a7}
 .chip:nth-child(5){background:#b21b86}
 .chip:nth-child(6){background:#2268b6}
-.chip.active{outline:3px solid white;transform:translateY(-4px)}
-.actions{display:flex;justify-content:center;gap:8px;margin:9px 0}
-.actions button{border:0;border-radius:8px;padding:10px 15px;font-weight:900;font-size:11px}
+.chip.active{outline:3px solid white;transform:translateY(-3px)}
+.actions{display:flex;justify-content:center;gap:9px;margin:10px 0}
+.actions button{border:0;border-radius:8px;padding:11px 17px;font-weight:900;font-size:12px}
 .place{background:#f5ce61;color:#421007}
 .cancel{background:#64232a;color:white;border:1px solid #e5a4a4!important}
-.message{text-align:center;color:#ffe18c;font-size:11px;min-height:25px;padding:7px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
-.stat{background:#21090d;border:1px solid #8d592e;border-radius:8px;text-align:center;padding:9px 2px}
-.stat small{display:block;color:#cdb69b;font-size:9px}
-.stat b{display:block;color:#ffe17a;font-size:13px;margin-top:4px}
-.history{margin-top:12px;background:#16080b;border:1px solid #98612e;border-radius:10px;padding:10px}
-.history h3{font-size:12px;color:#ffdf82;margin:0 0 8px}
+.message{text-align:center;color:#ffe18c;font-size:12px;min-height:25px;padding:6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.stat{background:#21090d;border:1px solid #8d592e;border-radius:8px;text-align:center;padding:10px 2px}
+.stat small{display:block;color:#cdb69b;font-size:10px}
+.stat b{display:block;color:#ffe17a;font-size:14px;margin-top:5px}
+.history{margin-top:13px;background:#16080b;border:1px solid #98612e;border-radius:10px;padding:11px}
+.history h3{font-size:13px;color:#ffdf82;margin:0 0 9px}
 .historyballs{display:flex;gap:5px;overflow-x:auto}
-.ball{flex:0 0 27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;background:#eee;color:#222}
+.ball{flex:0 0 28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;background:#eee;color:#222}
 .ball.odd{background:#bd2028;color:white}
-.histrow{font-size:10px;color:#ddd0bd;padding:7px 0;border-bottom:1px solid #49302a;display:flex;justify-content:space-between}
-.histrow:last-child{border:0}
-.note{text-align:center;color:#977d6b;font-size:9px;margin:12px 0}
-@media(max-width:500px){
- .page{padding:7px}
- .game{padding:7px;border-radius:15px}
- .topgame{grid-template-columns:.75fr 1.25fr 1fr;gap:4px}
- .bowl{font-size:48px}
+.histrow{font-size:11px;color:#ddd0bd;padding:8px 0;border-bottom:1px solid #49302a;display:flex;justify-content:space-between;gap:5px}
+.note{text-align:center;color:#977d6b;font-size:10px;margin:13px 0}
+@media(max-width:600px){
+ header{height:50px;padding:0 9px}
+ .logo{font-size:19px}
+ .page{padding:6px}
+ .game{padding:7px;border-radius:13px}
+ .topgame{grid-template-columns:.7fr 1.3fr .95fr;gap:4px}
+ .players{padding:7px 2px}
  .players strong{font-size:16px}
+ .players small{font-size:8px}
  .road{padding:4px}
+ .road-title{font-size:8px}
  .road-grid{gap:2px}
- .door{min-height:88px;padding:7px 2px}
+ .bowl-cover{font-size:59px}
+ .covered-stage{height:95px}
+ .door{min-height:91px;padding:7px 2px}
  .door-name{font-size:11px}
  .door-desc{font-size:8px}
- .door button{font-size:9px;padding:5px 7px}
- .chip{width:45px;height:45px;font-size:10px}
- .dice{gap:5px}
- .die{width:30px;height:30px}
+ .door-total{font-size:9px}
+ .door button{font-size:9px;padding:6px 5px}
+ .chips{gap:6px}
+ .chip{width:42px;height:42px;font-size:10px}
+ .timebox{height:32px}
+ .timetext{font-size:11px}
+ .actions button{padding:10px 12px;font-size:11px}
+ .stat small{font-size:8px}
+ .stat b{font-size:12px}
 }
 </style>
 </head>
 <body>
 <header>
  <div class="logo">B59CLUB</div>
- <a href="sanh.html">← VỀ SẢNH</a>
+ <a class="back" href="sanh.html">← QUAY LẠI SẢNH</a>
 </header>
+
 <div class="page">
  <div class="topline">
   <small>🥣 XÓC ĐĨA · BÀN CHƠI DEMO</small>
-  <div class="balance">💰 <span id="balance">1.000.000</span></div>
+  <div class="balance">💰 <span id="balance">1.000.000</span> xu</div>
  </div>
 
  <main class="game">
@@ -133,9 +144,14 @@ header a{color:white;text-decoration:none;font-size:12px;background:#263e35;padd
 
   <div class="resultbox">
    <small id="round">PHIÊN #1001</small>
-   <div class="dice" id="dice">
-    <div class="die">?</div><div class="die">?</div>
-    <div class="die">?</div><div class="die">?</div>
+   <div class="covered-stage">
+    <div class="dice" id="dice">
+     <div class="die red-piece">●</div>
+     <div class="die white-piece">●</div>
+     <div class="die red-piece">●</div>
+     <div class="die white-piece">●</div>
+    </div>
+    <div class="bowl-cover" id="bowlCover">🥣</div>
    </div>
    <div class="result" id="result">CHỜ MỞ BÁT</div>
    <div class="resultdesc" id="resultdesc">Đang chờ phiên cược mới</div>
@@ -145,10 +161,10 @@ header a{color:white;text-decoration:none;font-size:12px;background:#263e35;padd
 
   <div class="timebox">
    <div class="timefill" id="timefill"></div>
-   <div class="timetext" id="timer">THỜI GIAN CƯỢC 30s</div>
+   <div class="timetext" id="timer">THỜI GIAN CƯỢC · 30s</div>
   </div>
 
-  <div class="chips" id="chips">
+  <div class="chips">
    <button class="chip active" onclick="choose(5000,this)">5K</button>
    <button class="chip" onclick="choose(10000,this)">10K</button>
    <button class="chip" onclick="choose(50000,this)">50K</button>
@@ -189,15 +205,20 @@ const names=[
  {id:'even',name:'CHẴN',desc:'0 · 2 · 4 đỏ',mult:2},
  {id:'odd',name:'LẺ',desc:'1 · 3 đỏ',mult:2}
 ];
-let selected='',amount=5000,bets={},bots={},history=[];
-let phase='betting',time=30,round=1001,jackpot=369651109;
-let balance=readBalance();
+
+let amount=5000,selected='',bets={},bots={};
+let phase='betting',time=30,round=1001;
+let history=[],jackpot=369651109;
 
 function readBalance(){
  let v=localStorage.getItem(KEY);
- if(v===null){localStorage.setItem(KEY,'1000000');return 1000000}
+ if(v===null){
+  localStorage.setItem(KEY,'1000000');
+  return 1000000;
+ }
  return Number(v)||0;
 }
+let balance=readBalance();
 function money(n){return Math.floor(n).toLocaleString('vi-VN')}
 function sync(){
  balance=readBalance();
@@ -210,15 +231,17 @@ function setBalance(n){
 function mine(){return Object.values(bets).reduce((a,b)=>a+b,0)}
 function botTotal(){return Object.values(bots).reduce((a,b)=>a+b,0)}
 function locked(){return phase!=='betting'||time<=5}
+function msg(t){document.getElementById('message').textContent=t}
 
 function drawBoard(){
- document.getElementById('board').innerHTML=names.map((d,i)=>`
- <div class="door ${d.id==='double'?'center':''} ${selected===d.id?'selected':''} ${d.id==='even'||d.id==='odd'?'wide':''}">
+ document.getElementById('board').innerHTML=names.map(d=>`
+ <div class="door ${d.id==='double'?'center':''} ${d.id==='even'||d.id==='odd'?'wide':''} ${selected===d.id?'selected':''}">
   <div class="door-name">${d.name}</div>
   <div class="door-desc">${d.desc}</div>
-  <div class="pile">${(bets[d.id]||0)>0?'🟡🔴🟣':''}</div>
   <div class="door-total">Cược: ${money(bets[d.id]||0)} xu</div>
-  <button onclick="selectDoor('${d.id}')" ${locked()?'disabled':''}>${selected===d.id?'ĐÃ CHỌN':'CHỌN CỬA'}</button>
+  <button onclick="selectDoor('${d.id}')" ${locked()?'disabled':''}>
+   ${selected===d.id?'ĐÃ CHỌN':'CHỌN CỬA'}
+  </button>
  </div>`).join('');
 }
 function choose(n,el){
@@ -248,38 +271,58 @@ function cancelBet(){
  if(!n){msg('Bạn chưa có cược để hủy!');return}
  setBalance(balance+n);
  bets={};
+ selected='';
  msg('Đã hủy toàn bộ cược và hoàn '+money(n)+' xu.');
  update();
-}
-function msg(t){document.getElementById('message').textContent=t}
-function update(){
- sync();
- drawBoard();
- document.getElementById('myBet').textContent=money(mine());
- document.getElementById('totalBet').textContent=money(mine()+botTotal());
- document.getElementById('timefill').style.width=(time/30*100)+'%';
- document.getElementById('timer').textContent=phase==='betting'?(locked()?'KHÓA CƯỢC · ':'THỜI GIAN CƯỢC · ')+time+'s':phase==='rolling'?'ĐANG XÓC ĐĨA...':'KẾT QUẢ PHIÊN';
 }
 function makeBots(){
  bots={};
  names.forEach(d=>bots[d.id]=Math.floor(Math.random()*2500000)+100000);
  document.getElementById('botCount').textContent=90+Math.floor(Math.random()*40);
 }
+function update(){
+ sync();
+ drawBoard();
+ document.getElementById('myBet').textContent=money(mine());
+ document.getElementById('totalBet').textContent=money(mine()+botTotal());
+ document.getElementById('timefill').style.width=(time/30*100)+'%';
+ document.getElementById('timer').textContent=
+  phase==='betting'?(locked()?'ĐÃ KHÓA CƯỢC · ':'THỜI GIAN CƯỢC · ')+time+'s':
+  phase==='rolling'?'ĐANG XÓC ĐĨA...':'CHỜ PHIÊN MỚI';
+}
 function startRoll(){
  phase='rolling';
  update();
+ msg('Đang xóc đĩa, chờ mở bát...');
  document.getElementById('result').textContent='ĐANG XÓC...';
- let bowl=document.getElementById('dice');
- bowl.innerHTML='<div class="die">?</div><div class="die">?</div><div class="die">?</div><div class="die">?</div>';
+ document.getElementById('bowlCover').classList.add('shake');
  let count=0;
  const anim=setInterval(()=>{
   count++;
-  document.getElementById('resultdesc').textContent='Nhân vật đang xóc bát...';
-  if(count>=12){clearInterval(anim);finishRoll()}
+  if(count>=12){
+   clearInterval(anim);
+   finishRoll();
+  }
  },150);
 }
 function finishRoll(){
+ document.getElementById('bowlCover').classList.remove('shake');
+ document.getElementById('bowlCover').classList.add('open');
+
  let reds=Math.floor(Math.random()*5);
+ let arr=Array.from({length:4},(_,i)=>i<reds);
+ for(let i=3;i>0;i--){
+  let j=Math.floor(Math.random()*(i+1));
+  [arr[i],arr[j]]=[arr[j],arr[i]];
+ }
+ document.getElementById('dice').innerHTML=arr.map(r=>
+  `<div class="die ${r?'red-piece':'white-piece'}">●</div>`
+ ).join('');
+
+ let label=reds%2===0?'CHẴN':'LẺ';
+ document.getElementById('result').textContent=label;
+ document.getElementById('resultdesc').textContent=reds+' đỏ · '+(4-reds)+' trắng';
+
  let wins=[];
  if(reds===1)wins.push('threeWhite');
  if(reds===3)wins.push('threeRed');
@@ -288,29 +331,27 @@ function finishRoll(){
  if(reds===4)wins.push('fourRed');
  wins.push(reds%2===0?'even':'odd');
 
- let arr=Array.from({length:4},(_,i)=>i<reds);
- for(let i=3;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
- document.getElementById('dice').innerHTML=arr.map(r=>`<div class="die" style="color:${r?'#c00':'#333'}">${r?'●':'○'}</div>`).join('');
- let label=reds%2===0?'CHẴN':'LẺ';
- document.getElementById('result').textContent=label;
- document.getElementById('resultdesc').textContent=reds+' đỏ · '+(4-reds)+' trắng';
-
  let payout=0;
  names.forEach(d=>{
-  if((bets[d.id]||0)>0&&wins.includes(d.id))payout+=bets[d.id]*d.mult;
+  if((bets[d.id]||0)>0&&wins.includes(d.id)){
+   payout+=bets[d.id]*d.mult;
+  }
  });
  if(payout){
   setBalance(readBalance()+payout);
-  msg('🎉 Bạn thắng! Tiền trả về: '+money(payout)+' xu.');
+  msg('🎉 Bạn thắng! Nhận về '+money(payout)+' xu.');
  }else if(mine()){
   msg('Phiên này bạn chưa trúng cửa nào.');
  }else{
   msg('Kết quả '+label+'.');
  }
+
  history.unshift({round,reds,label});
  history=history.slice(0,30);
  renderHistory();
+
  bets={};
+ selected='';
  phase='result';
  time=5;
  update();
@@ -319,23 +360,28 @@ function renderHistory(){
  document.getElementById('historyballs').innerHTML=history.map(h=>
   `<div class="ball ${h.label==='LẺ'?'odd':''}">${h.label==='CHẴN'?'C':'L'}</div>`
  ).join('');
+
  document.getElementById('historylist').innerHTML=history.slice(0,8).map(h=>
   `<div class="histrow"><span>Phiên #${h.round}</span><b>${h.reds} đỏ · ${4-h.reds} trắng · ${h.label}</b></div>`
  ).join('');
+
  document.getElementById('road').innerHTML=Array.from({length:32},(_,i)=>{
   let h=history[i];
-  return `<div class="road-dot ${h&&h.label==='LẺ'?'red':''}" style="opacity:${h?1:.25}"></div>`;
+  return `<div class="road-dot ${h&&h.label==='LẺ'?'red':''}" style="opacity:${h?1:.2}"></div>`;
  }).join('');
 }
 function nextRound(){
  round++;
  time=30;
  phase='betting';
- bets={};bots={};selected='';
+ bets={};
+ selected='';
+ document.getElementById('bowlCover').classList.remove('open','shake');
+ document.getElementById('dice').innerHTML=
+ '<div class="die red-piece">●</div><div class="die white-piece">●</div><div class="die red-piece">●</div><div class="die white-piece">●</div>';
  document.getElementById('round').textContent='PHIÊN #'+round;
  document.getElementById('result').textContent='CHỜ MỞ BÁT';
  document.getElementById('resultdesc').textContent='Đang chờ phiên cược mới';
- document.getElementById('dice').innerHTML='<div class="die">?</div><div class="die">?</div><div class="die">?</div><div class="die">?</div>';
  msg('Phiên mới bắt đầu. Mời đặt cược!');
  makeBots();
  update();
@@ -358,6 +404,7 @@ setInterval(()=>{
 },1000);
 window.addEventListener('storage',sync);
 window.addEventListener('pageshow',sync);
+
 document.getElementById('round').textContent='PHIÊN #'+round;
 makeBots();
 renderHistory();
