@@ -3,295 +3,414 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ADMIN B59 - Control Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADMIN B59 - DEMO CENTER</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#071426;color:#edf5ff;font-family:Arial,sans-serif}
-button,input{font:inherit}
+button,input,select{font:inherit}
 button{cursor:pointer;border:0}
-.login{max-width:390px;margin:12vh auto;background:#102944;padding:28px;border-radius:18px;text-align:center;border:1px solid #24517d}
-.logo{font-size:28px;font-weight:900;color:#fff}
-.logo span{color:#38a8ff}
-.login input,.search{width:100%;padding:14px;background:#091a2e;border:1px solid #315477;color:white;border-radius:9px;margin:12px 0}
-.primary{background:#087fe0;color:white;padding:13px 18px;border-radius:9px;font-weight:bold}
+.login{width:min(390px,90%);margin:12vh auto;background:#102944;padding:28px;border:1px solid #24517d;border-radius:18px;text-align:center}
+.logo{font-size:29px;font-weight:900;color:white}
+.logo span{color:#39aaff}
+.login input,.field{width:100%;padding:13px;background:#091a2e;border:1px solid #315477;color:white;border-radius:9px;margin:10px 0}
+.primary{background:#087fe0;color:white;padding:12px 16px;border-radius:9px;font-weight:bold}
 .login .primary{width:100%}
-.error{color:#ff8b8b;font-size:13px}
-.layout{display:none;min-height:100vh}
-.sidebar{width:245px;background:#0b2038;position:fixed;inset:0 auto 0 0;padding:23px 15px;border-right:1px solid #1d3d5d}
-.brand{font-size:23px;font-weight:900;padding:5px 10px 28px}
-.brand span{color:#36aaff}
-.nav-title{font-size:11px;color:#7095b8;padding:14px 10px 8px}
-.nav button{display:block;width:100%;text-align:left;padding:13px 12px;margin:4px 0;border-radius:9px;background:transparent;color:#b9cee3}
+.layout{display:none}
+.sidebar{width:235px;position:fixed;inset:0 auto 0 0;background:#0b2038;padding:22px 13px;border-right:1px solid #1d3d5d;overflow:auto}
+.brand{font-size:23px;font-weight:900;padding:8px 10px 25px}
+.brand span{color:#39aaff}
+.nav-title{font-size:10px;color:#7598b9;padding:15px 10px 7px}
+.nav button{display:block;width:100%;text-align:left;padding:13px 11px;margin:4px 0;border-radius:9px;background:transparent;color:#b9cee3}
 .nav button.active,.nav button:hover{background:#1266ad;color:white}
-.main{margin-left:245px;padding:25px;max-width:1500px}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:25px}
-.topbar h1{font-size:24px;margin:0}
-.online{color:#60e6a4;font-size:13px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.card,.panel{background:#102944;border:1px solid #1c4265;border-radius:13px;padding:18px}
-.card small{color:#9bb9d5}
-.card strong{display:block;font-size:25px;margin-top:12px}
-.panel{margin-top:18px}
-.panel h3{margin:0 0 17px;color:#73bdff}
+.main{margin-left:235px;padding:24px;max-width:1500px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.topbar h1{margin:0;font-size:24px}
+.online{color:#62e6a5;font-size:12px;margin-top:7px}
+.demo{background:#6c4b13;color:#ffe3a1;padding:7px 10px;border-radius:7px;font-size:11px;font-weight:bold}
 .page{display:none}
 .page.active{display:block}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.actions button{padding:10px 14px;border-radius:8px;background:#087fe0;color:white}
-.danger{background:#a73549!important}
-.success{background:#16875d!important}
-.warning{background:#a87517!important}
-table{width:100%;border-collapse:collapse;min-width:580px}
-th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #29445f;font-size:13px}
-th{color:#83bde9}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card,.panel{background:#102944;border:1px solid #1c4265;border-radius:13px;padding:17px}
+.card small{color:#9bb9d5;font-size:11px}
+.card strong{display:block;font-size:25px;margin-top:10px}
+.panel{margin-top:16px}
+.panel h3{margin:0 0 16px;color:#73bdff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.game-card{background:#0c2038;border:1px solid #285477;border-radius:12px;padding:16px}
+.game-card h3{margin:0 0 8px;color:#65baff}
+.jackpot{font-size:27px;font-weight:bold;color:#ffcf55;margin:12px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.actions button{padding:10px 13px;border-radius:8px;background:#087fe0;color:white}
+.green{background:#16875d!important}
+.red{background:#a73549!important}
+.gold{background:#a87517!important}
+.field{margin:7px 0 12px}
+label{font-size:12px;color:#b6cde3}
 .table-wrap{overflow-x:auto}
-.field{width:100%;padding:12px;background:#091a2e;border:1px solid #315477;color:white;border-radius:8px;margin:8px 0 14px}
-label{font-size:13px;color:#b6cde3}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.statbar{height:12px;background:#1b3856;border-radius:10px;overflow:hidden}
-.statbar div{height:100%;width:68%;background:#168ee9}
-.notice{color:#9cb6d0;font-size:12px;line-height:1.6}
-.mobile-menu{display:none}
+table{width:100%;border-collapse:collapse;min-width:570px}
+th,td{text-align:left;padding:12px 9px;border-bottom:1px solid #29445f;font-size:12px}
+th{color:#83bde9}
+.tag{background:#17466b;color:#8ed1ff;padding:5px 7px;border-radius:5px;font-size:10px}
+.notice{font-size:12px;color:#9cb6d0;line-height:1.6}
+.status{color:#62e6a5}
+.bar{height:10px;background:#203c58;border-radius:10px;overflow:hidden;margin-top:8px}
+.bar div{height:100%;background:#168ee9}
+.bot-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #29445f;gap:10px}
 @media(max-width:850px){
- .sidebar{width:75px;padding:15px 8px}
- .brand{font-size:12px;padding:8px 0 25px;text-align:center}
- .nav button{font-size:0;text-align:center;padding:14px 3px}
- .nav button:first-letter{font-size:19px}
- .nav-title{display:none}
- .main{margin-left:75px;padding:15px}
- .cards{grid-template-columns:repeat(2,1fr)}
+.sidebar{width:70px;padding:12px 6px}
+.brand{font-size:11px;text-align:center;padding:8px 0 20px}
+.nav-title{display:none}
+.nav button{font-size:0;text-align:center;padding:14px 2px}
+.nav button:first-letter{font-size:19px}
+.main{margin-left:70px;padding:13px}
+.cards{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:500px){.form-grid{grid-template-columns:1fr}.topbar h1{font-size:20px}}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}.topbar h1{font-size:19px}}
 </style>
 </head>
 <body>
 
 <div class="login" id="login">
  <div class="logo">ADMIN <span>B59</span></div>
- <p style="color:#9bb9d5">CONTROL CENTER</p>
- <input id="password" type="password" placeholder="Mật khẩu quản trị">
+ <p style="color:#9bb9d5">DEMO CONTROL CENTER</p>
+ <input id="password" type="password" placeholder="Mật khẩu ADMIN">
  <button class="primary" onclick="loginAdmin()">ĐĂNG NHẬP</button>
- <p class="error" id="error"></p>
+ <p id="loginError" style="color:#ff8b8b;font-size:13px"></p>
+ <p class="notice">Chế độ thử nghiệm - không có giao dịch tiền thật.</p>
 </div>
 
 <div class="layout" id="layout">
- <aside class="sidebar">
-  <div class="brand">ADMIN <span>B59</span></div>
-  <div class="nav">
-   <div class="nav-title">TỔNG QUAN</div>
-   <button class="active" onclick="showPage('overview',this)">📊 Tổng quan</button>
-   <div class="nav-title">QUẢN LÝ</div>
-   <button onclick="showPage('players',this)">👥 Người chơi</button>
-   <button onclick="showPage('money',this)">💰 Điều chỉnh xu</button>
-   <button onclick="showPage('transactions',this)">💳 Nạp / Rút</button>
-   <button onclick="showPage('games',this)">🎮 Trò chơi</button>
-   <button onclick="showPage('jackpot',this)">🎰 Sự kiện nổ hũ</button>
-   <div class="nav-title">HỆ THỐNG</div>
-   <button onclick="showPage('history',this)">📋 Nhật ký</button>
-   <button onclick="logout()">🚪 Đăng xuất</button>
+<aside class="sidebar">
+ <div class="brand">ADMIN <span>B59</span></div>
+ <div class="nav">
+  <div class="nav-title">DASHBOARD</div>
+  <button class="active" onclick="page('overview',this)">📊 Tổng quan</button>
+  <div class="nav-title">QUẢN LÝ GAME</div>
+  <button onclick="page('taixiu',this)">🎲 Tài Xỉu</button>
+  <button onclick="page('chanle',this)">🔴 Chẵn Lẻ</button>
+  <button onclick="page('jackpots',this)">🏆 Quản lý hũ</button>
+  <div class="nav-title">BOT VÀ THỐNG KÊ</div>
+  <button onclick="page('bots',this)">🤖 Bot DEMO</button>
+  <button onclick="page('statistics',this)">📈 Thống kê</button>
+  <button onclick="page('history',this)">📋 Lịch sử</button>
+  <div class="nav-title">HỆ THỐNG</div>
+  <button onclick="logout()">🚪 Đăng xuất</button>
+ </div>
+</aside>
+
+<main class="main">
+ <div class="topbar">
+  <div>
+   <h1 id="title">Tổng quan hệ thống</h1>
+   <div class="online">● ADMIN B59 - ĐANG HOẠT ĐỘNG</div>
   </div>
- </aside>
+  <span class="demo">DEMO MODE · XU ẢO</span>
+ </div>
 
- <main class="main">
-  <div class="topbar">
-   <div>
-    <h1 id="pageTitle">Tổng quan hệ thống</h1>
-    <div class="online">● ADMIN CONTROL CENTER</div>
-   </div>
-   <span style="color:#8ebbe0">ADMIN B59</span>
+ <section class="page active" id="overview">
+  <div class="cards">
+   <div class="card"><small>TỔNG PHIÊN DEMO</small><strong id="roundCount">0</strong></div>
+   <div class="card"><small>TỔNG BOT DEMO</small><strong id="botCount">0</strong></div>
+   <div class="card"><small>TỔNG XU HŨ</small><strong id="totalJackpot">0</strong></div>
+   <div class="card"><small>SỰ KIỆN ĐÃ NỔ</small><strong id="winCount">0</strong></div>
   </div>
-
-  <section class="page active" id="overview">
-   <div class="cards">
-    <div class="card"><small>TỔNG NGƯỜI CHƠI</small><strong id="playerCount">0</strong></div>
-    <div class="card"><small>TỔNG XU ẢO</small><strong id="coinCount">0</strong></div>
-    <div class="card"><small>YÊU CẦU NẠP</small><strong id="depositCount">0</strong></div>
-    <div class="card"><small>YÊU CẦU RÚT</small><strong id="withdrawCount">0</strong></div>
-   </div>
-   <div class="panel">
-    <h3>📈 Tình trạng hệ thống</h3>
-    <p>Trạng thái dữ liệu demo</p>
-    <div class="statbar"><div></div></div>
-    <p class="notice">Đây là giao diện quản trị thử nghiệm. Các số liệu sẽ lấy từ dữ liệu demo lưu trong trình duyệt.</p>
-   </div>
-  </section>
-
-  <section class="page" id="players">
-   <div class="panel">
-    <h3>👥 Tìm kiếm người chơi</h3>
-    <input class="search" id="search" placeholder="Tìm theo tên hoặc ID..." oninput="renderPlayers()">
-    <div class="table-wrap">
-     <table><thead><tr><th>ID</th><th>Tên</th><th>Số dư</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-     <tbody id="playersTable"></tbody></table>
+  <div class="panel">
+   <h3>🎮 Trạng thái trò chơi</h3>
+   <div class="grid2">
+    <div class="game-card">
+     <h3>🎲 TÀI XỈU</h3>
+     <p id="txOverview">Đang hoạt động</p>
+     <span class="tag">DEMO GAME</span>
+    </div>
+    <div class="game-card">
+     <h3>🔴 CHẴN LẺ</h3>
+     <p id="clOverview">Đang hoạt động</p>
+     <span class="tag">DEMO GAME</span>
     </div>
    </div>
-  </section>
+  </div>
+  <div class="panel">
+   <h3>⚡ Điều khiển nhanh</h3>
+   <div class="actions">
+    <button onclick="runRound('taixiu')">Chạy phiên Tài Xỉu</button>
+    <button onclick="runRound('chanle')">Chạy phiên Chẵn Lẻ</button>
+    <button class="gold" onclick="resetStats()">Đặt lại thống kê demo</button>
+   </div>
+  </div>
+ </section>
 
-  <section class="page" id="money">
-   <div class="panel">
-    <h3>💰 Điều chỉnh xu ảo</h3>
-    <label>ID người chơi</label>
-    <input class="field" id="targetId" placeholder="Nhập ID">
-    <label>Số xu</label>
-    <input class="field" id="amount" type="number" min="1" placeholder="Nhập số xu">
-    <div class="actions">
-     <button class="success" onclick="adjustCoins(1)">＋ Cộng xu</button>
-     <button class="danger" onclick="adjustCoins(-1)">－ Thu hồi xu</button>
+ <section class="page" id="taixiu">
+  <div class="panel">
+   <h3>🎲 QUẢN LÝ TÀI XỈU</h3>
+   <div class="grid2">
+    <div class="game-card">
+     <label>HŨ TÀI XỈU</label>
+     <div class="jackpot" id="txJackpot">0 xu</div>
+     <label>Điều chỉnh giá trị hũ</label>
+     <input class="field" id="txAmount" type="number" min="0" placeholder="Nhập số xu">
+     <div class="actions">
+      <button onclick="adjustPot('taixiu',1)">Cộng vào hũ</button>
+      <button class="red" onclick="adjustPot('taixiu',-1)">Trừ khỏi hũ</button>
+     </div>
     </div>
-    <p id="moneyMessage" class="notice"></p>
-   </div>
-  </section>
-
-  <section class="page" id="transactions">
-   <div class="panel">
-    <h3>💳 Yêu cầu nạp / rút demo</h3>
-    <p class="notice">Danh sách yêu cầu minh họa. Chưa kết nối ngân hàng hoặc thanh toán thật.</p>
-    <div class="table-wrap">
-     <table><thead><tr><th>Mã</th><th>Loại</th><th>Số xu</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-     <tbody id="transactionTable"></tbody></table>
+    <div class="game-card">
+     <label>KẾT QUẢ PHIÊN DEMO GẦN NHẤT</label>
+     <div class="jackpot" id="txResult">Chưa có</div>
+     <p class="notice">Kết quả được tạo ngẫu nhiên trong mô phỏng.</p>
+     <button class="primary" onclick="runRound('taixiu')">CHẠY PHIÊN DEMO</button>
     </div>
    </div>
-  </section>
-
-  <section class="page" id="games">
-   <div class="panel">
-    <h3>🎮 Bật / tắt trò chơi</h3>
-    <div id="gameList"></div>
+   <h3 style="margin-top:22px">Sự kiện hũ Tài Xỉu</h3>
+   <div class="actions">
+    <button class="green" onclick="burstPot('taixiu','TÀI')">Nổ hũ TÀI - TEST</button>
+    <button class="gold" onclick="burstPot('taixiu','XỈU')">Nổ hũ XỈU - TEST</button>
    </div>
-  </section>
+   <p class="notice">Nút TEST chỉ tạo sự kiện minh họa và ghi lịch sử, không điều khiển kết quả cược của người chơi.</p>
+  </div>
+  <div class="panel">
+   <h3>Lịch sử Tài Xỉu</h3>
+   <div class="table-wrap"><table><thead><tr><th>Phiên</th><th>Kết quả</th><th>Thời gian</th></tr></thead><tbody id="txHistory"></tbody></table></div>
+  </div>
+ </section>
 
-  <section class="page" id="jackpot">
-   <div class="panel">
-    <h3>🎰 Sự kiện nổ hũ demo</h3>
-    <p class="notice">Điều khiển trạng thái sự kiện minh bạch trong bản mô phỏng, không can thiệp kết quả cược hoặc kết quả thắng thua.</p>
-    <div class="actions">
-     <button class="success" onclick="setJackpot(true)">KÍCH HOẠT SỰ KIỆN</button>
-     <button class="danger" onclick="setJackpot(false)">KẾT THÚC SỰ KIỆN</button>
+ <section class="page" id="chanle">
+  <div class="panel">
+   <h3>🔴 QUẢN LÝ CHẴN LẺ</h3>
+   <div class="grid2">
+    <div class="game-card">
+     <label>HŨ CHẴN LẺ</label>
+     <div class="jackpot" id="clJackpot">0 xu</div>
+     <label>Điều chỉnh giá trị hũ</label>
+     <input class="field" id="clAmount" type="number" min="0" placeholder="Nhập số xu">
+     <div class="actions">
+      <button onclick="adjustPot('chanle',1)">Cộng vào hũ</button>
+      <button class="red" onclick="adjustPot('chanle',-1)">Trừ khỏi hũ</button>
+     </div>
     </div>
-    <p id="jackpotStatus"></p>
+    <div class="game-card">
+     <label>KẾT QUẢ PHIÊN DEMO GẦN NHẤT</label>
+     <div class="jackpot" id="clResult">Chưa có</div>
+     <p class="notice">Kết quả được tạo ngẫu nhiên trong mô phỏng.</p>
+     <button class="primary" onclick="runRound('chanle')">CHẠY PHIÊN DEMO</button>
+    </div>
    </div>
-  </section>
+   <h3 style="margin-top:22px">Sự kiện hũ Chẵn Lẻ</h3>
+   <div class="actions">
+    <button class="green" onclick="burstPot('chanle','CHẴN')">Nổ hũ CHẴN - TEST</button>
+    <button class="gold" onclick="burstPot('chanle','LẺ')">Nổ hũ LẺ - TEST</button>
+   </div>
+   <p class="notice">Sự kiện thử nghiệm được ghi rõ trong lịch sử.</p>
+  </div>
+  <div class="panel">
+   <h3>Lịch sử Chẵn Lẻ</h3>
+   <div class="table-wrap"><table><thead><tr><th>Phiên</th><th>Kết quả</th><th>Thời gian</th></tr></thead><tbody id="clHistory"></tbody></table></div>
+  </div>
+ </section>
 
-  <section class="page" id="history">
-   <div class="panel">
-    <h3>📋 Nhật ký thao tác ADMIN</h3>
-    <div id="historyList"></div>
+ <section class="page" id="jackpots">
+  <div class="panel">
+   <h3>🏆 QUẢN LÝ HŨ TOÀN HỆ THỐNG</h3>
+   <div class="grid2">
+    <div class="game-card">
+     <h3>HŨ TÀI XỈU</h3>
+     <div class="jackpot" id="allTx">0 xu</div>
+     <div class="bar"><div id="txBar"></div></div>
+    </div>
+    <div class="game-card">
+     <h3>HŨ CHẴN LẺ</h3>
+     <div class="jackpot" id="allCl">0 xu</div>
+     <div class="bar"><div id="clBar"></div></div>
+    </div>
    </div>
-  </section>
- </main>
+   <div class="actions">
+    <button onclick="burstPot('taixiu','TÀI')">TEST NỔ TÀI</button>
+    <button onclick="burstPot('taixiu','XỈU')">TEST NỔ XỈU</button>
+    <button onclick="burstPot('chanle','CHẴN')">TEST NỔ CHẴN</button>
+    <button onclick="burstPot('chanle','LẺ')">TEST NỔ LẺ</button>
+   </div>
+   <p class="notice">Hũ chỉ sử dụng xu ảo. Sự kiện nổ hũ demo không trao đổi thành tiền.</p>
+  </div>
+ </section>
+
+ <section class="page" id="bots">
+  <div class="panel">
+   <h3>🤖 BOT DEMO</h3>
+   <p class="notice">Các bot dưới đây là nhân vật giả lập, không phải người chơi thật.</p>
+   <div class="actions">
+    <button class="green" onclick="toggleBots(true)">BẬT BOT TỰ ĐỘNG</button>
+    <button class="red" onclick="toggleBots(false)">TẮT BOT</button>
+   </div>
+   <p id="botStatus" class="status"></p>
+   <div id="botList"></div>
+  </div>
+  <div class="panel">
+   <h3>Hoạt động bot gần đây</h3>
+   <div class="table-wrap"><table><thead><tr><th>Tên bot</th><th>Trò chơi</th><th>Lựa chọn</th><th>Xu mô phỏng</th></tr></thead><tbody id="botActivity"></tbody></table></div>
+  </div>
+ </section>
+
+ <section class="page" id="statistics">
+  <div class="cards">
+   <div class="card"><small>TÀI XỈU</small><strong id="txRounds">0</strong></div>
+   <div class="card"><small>CHẴN LẺ</small><strong id="clRounds">0</strong></div>
+   <div class="card"><small>TỔNG BOT CƯỢC DEMO</small><strong id="botBets">0</strong></div>
+   <div class="card"><small>TỔNG HŨ ĐÃ NỔ</small><strong id="totalWins">0</strong></div>
+  </div>
+  <div class="panel">
+   <h3>Thống kê phiên</h3>
+   <div id="statsText" class="notice"></div>
+  </div>
+ </section>
+
+ <section class="page" id="history">
+  <div class="panel">
+   <h3>📋 Nhật ký ADMIN B59</h3>
+   <div id="logs" class="notice"></div>
+  </div>
+ </section>
+</main>
 </div>
 
 <script>
-const ADMIN_PASSWORD="123456";
+const ADMIN_PASSWORD="admin123";
+const KEY="b59_admin_demo_v2";
+const botNames=["BOT Minh Anh","BOT Gia Bảo","BOT Khánh Linh","BOT Đức Anh","BOT Bảo Ngọc","BOT Hoàng Nam","BOT Nhật Vy","BOT Tuấn Kiệt"];
+let timer=null;
 
+function fresh(){
+ return {
+  pots:{taixiu:1000000,chanle:750000},
+  rounds:{taixiu:0,chanle:0},
+  results:{taixiu:[],chanle:[]},
+  wins:[],
+  botsOn:false,
+  botBets:[],
+  logs:[]
+ };
+}
+function load(){
+ try{return {...fresh(),...JSON.parse(localStorage.getItem(KEY)||"{}")}}
+ catch(e){return fresh()}
+}
+let data=load();
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function fmt(n){return Number(n||0).toLocaleString("vi-VN")}
+function log(s){
+ data.logs.unshift(new Date().toLocaleString("vi-VN")+" · "+s);
+ data.logs=data.logs.slice(0,100);
+}
 function loginAdmin(){
  if(document.getElementById("password").value===ADMIN_PASSWORD){
   document.getElementById("login").style.display="none";
   document.getElementById("layout").style.display="block";
-  refreshAll();
-  logAction("Đăng nhập ADMIN");
- }else{
-  document.getElementById("error").textContent="Mật khẩu không đúng!";
- }
+  log("Đăng nhập ADMIN");
+  save();
+ }else document.getElementById("loginError").textContent="Mật khẩu không chính xác";
 }
 function logout(){
+ if(timer){clearInterval(timer);timer=null}
+ data.botsOn=false;save();
  document.getElementById("layout").style.display="none";
  document.getElementById("login").style.display="block";
  document.getElementById("password").value="";
 }
-function showPage(id,btn){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+function page(id,btn){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
  document.getElementById(id).classList.add("active");
- document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
  btn.classList.add("active");
- const titles={overview:"Tổng quan hệ thống",players:"Quản lý người chơi",money:"Điều chỉnh xu",transactions:"Quản lý nạp / rút",games:"Quản lý trò chơi",jackpot:"Sự kiện nổ hũ",history:"Nhật ký ADMIN"};
- document.getElementById("pageTitle").textContent=titles[id];
+ const titles={overview:"Tổng quan hệ thống",taixiu:"Quản lý Tài Xỉu",chanle:"Quản lý Chẵn Lẻ",jackpots:"Quản lý hũ",bots:"Bot DEMO",statistics:"Thống kê",history:"Nhật ký ADMIN"};
+ document.getElementById("title").textContent=titles[id];
 }
-function getPlayers(){return JSON.parse(localStorage.getItem("b59_players")||"[]")}
-function savePlayers(p){localStorage.setItem("b59_players",JSON.stringify(p))}
-function getTransactions(){return JSON.parse(localStorage.getItem("b59_transactions")||"[]")}
-function logAction(message){
- let logs=JSON.parse(localStorage.getItem("b59_admin_logs")||"[]");
- logs.unshift(new Date().toLocaleString("vi-VN")+" - "+message);
- localStorage.setItem("b59_admin_logs",JSON.stringify(logs.slice(0,100)));
- renderHistory();
+function adjustPot(game,dir){
+ const id=game==="taixiu"?"txAmount":"clAmount";
+ const amount=Number(document.getElementById(id).value);
+ if(!Number.isSafeInteger(amount)||amount<=0)return alert("Nhập số xu nguyên hợp lệ.");
+ if(dir<0&&data.pots[game]<amount)return alert("Hũ không đủ xu.");
+ data.pots[game]+=dir*amount;
+ log((dir>0?"Cộng ":"Trừ ")+fmt(amount)+" xu hũ "+game);
+ document.getElementById(id).value="";
+ save();
 }
-function renderPlayers(){
- let q=(document.getElementById("search")?.value||"").toLowerCase();
- let rows=getPlayers().filter(p=>(p.name+" "+p.id).toLowerCase().includes(q));
- document.getElementById("playersTable").innerHTML=rows.map(p=>
- `<tr><td>${escapeHTML(p.id)}</td><td>${escapeHTML(p.name)}</td><td>${Number(p.balance||0).toLocaleString("vi-VN")}</td><td>${p.locked?"Đã khóa":"Hoạt động"}</td><td><button class="warning" onclick="toggleLock('${safeId(p.id)}')">${p.locked?"Mở khóa":"Khóa"}</button> <button class="danger" onclick="deletePlayer('${safeId(p.id)}')">Xóa</button></td></tr>`
- ).join("")||'<tr><td colspan="5">Chưa có dữ liệu người chơi.</td></tr>';
+function runRound(game){
+ const options=game==="taixiu"?["TÀI","XỈU"]:["CHẴN","LẺ"];
+ const result=options[Math.floor(Math.random()*2)];
+ data.rounds[game]++;
+ const id=game==="taixiu"?"TX":"CL";
+ const entry={id:id+"-"+data.rounds[game],result,time:new Date().toLocaleString("vi-VN")};
+ data.results[game].unshift(entry);
+ data.results[game]=data.results[game].slice(0,30);
+ log("Phiên "+entry.id+" có kết quả demo "+result);
+ save();
 }
-function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function safeId(s){return String(s).replace(/\\/g,"\\\\").replace(/'/g,"\\'")}
-function toggleLock(id){
- let p=getPlayers(),u=p.find(x=>x.id===id);if(!u)return;
- u.locked=!u.locked;savePlayers(p);logAction((u.locked?"Khóa ":"Mở khóa ")+id);refreshAll();
+function burstPot(game,result){
+ const amount=data.pots[game];
+ if(amount<=0)return alert("Hũ đang không có xu.");
+ if(!confirm("Tạo sự kiện NỔ HŨ DEMO "+result+" với "+fmt(amount)+" xu ảo?"))return;
+ data.wins.unshift({game,result,amount,time:new Date().toLocaleString("vi-VN")});
+ data.pots[game]=0;
+ log("Sự kiện nổ hũ demo "+game+" - "+result+" - "+fmt(amount)+" xu");
+ save();
+ alert("Đã tạo sự kiện nổ hũ DEMO!");
 }
-function deletePlayer(id){
- if(!confirm("Xóa tài khoản demo "+id+"?"))return;
- savePlayers(getPlayers().filter(x=>x.id!==id));
- logAction("Xóa tài khoản demo "+id);refreshAll();
+function toggleBots(on){
+ data.botsOn=on;
+ if(timer){clearInterval(timer);timer=null}
+ if(on)timer=setInterval(botAction,3500);
+ log(on?"Bật bot demo tự động":"Tắt bot demo tự động");
+ save();
 }
-function adjustCoins(dir){
- let id=document.getElementById("targetId").value.trim();
- let n=Number(document.getElementById("amount").value);
- let p=getPlayers(),u=p.find(x=>x.id===id);
- if(!u)return alert("Không tìm thấy tài khoản trong dữ liệu demo.");
- if(!Number.isSafeInteger(n)||n<=0)return alert("Nhập số xu nguyên hợp lệ.");
- if(dir<0&&Number(u.balance||0)<n)return alert("Số dư không đủ.");
- u.balance=Number(u.balance||0)+dir*n;
- savePlayers(p);logAction((dir>0?"Cộng ":"Thu hồi ")+n+" xu của "+id);
- document.getElementById("moneyMessage").textContent="Đã cập nhật dữ liệu demo.";
- refreshAll();
+function botAction(){
+ if(!data.botsOn)return;
+ const name=botNames[Math.floor(Math.random()*botNames.length)];
+ const game=Math.random()<.5?"taixiu":"chanle";
+ const choice=game==="taixiu"?(Math.random()<.5?"TÀI":"XỈU"):(Math.random()<.5?"CHẴN":"LẺ");
+ const amount=(Math.floor(Math.random()*10)+1)*1000;
+ data.botBets.unshift({name,game,choice,amount,time:new Date().toLocaleTimeString("vi-VN")});
+ data.botBets=data.botBets.slice(0,50);
+ // Tăng hũ mô phỏng bằng một phần cược giả lập
+ data.pots[game]+=Math.floor(amount*.05);
+ save();
 }
-const gameNames=["Tài Xỉu","Xóc Đĩa","Slot","Bầu Cua"];
-function renderGames(){
- let states=JSON.parse(localStorage.getItem("b59_game_states")||"{}");
- document.getElementById("gameList").innerHTML=gameNames.map(g=>
- `<div style="padding:13px 0;border-bottom:1px solid #29445f;display:flex;justify-content:space-between;align-items:center"><b>${g}</b><button class="${states[g]===false?"danger":"success"}" onclick="toggleGame('${g}')">${states[g]===false?"ĐANG TẮT":"ĐANG BẬT"}</button></div>`
- ).join("");
+function render(){
+ document.getElementById("roundCount").textContent=data.rounds.taixiu+data.rounds.chanle;
+ document.getElementById("botCount").textContent=botNames.length;
+ document.getElementById("totalJackpot").textContent=fmt(data.pots.taixiu+data.pots.chanle);
+ document.getElementById("winCount").textContent=data.wins.length;
+ document.getElementById("txJackpot").textContent=fmt(data.pots.taixiu)+" xu";
+ document.getElementById("clJackpot").textContent=fmt(data.pots.chanle)+" xu";
+ document.getElementById("allTx").textContent=fmt(data.pots.taixiu)+" xu";
+ document.getElementById("allCl").textContent=fmt(data.pots.chanle)+" xu";
+ document.getElementById("txResult").textContent=data.results.taixiu[0]?.result||"Chưa có";
+ document.getElementById("clResult").textContent=data.results.chanle[0]?.result||"Chưa có";
+ document.getElementById("txOverview").textContent="Phiên: "+data.rounds.taixiu;
+ document.getElementById("clOverview").textContent="Phiên: "+data.rounds.chanle;
+ document.getElementById("txRounds").textContent=data.rounds.taixiu;
+ document.getElementById("clRounds").textContent=data.rounds.chanle;
+ document.getElementById("botBets").textContent=data.botBets.length;
+ document.getElementById("totalWins").textContent=data.wins.length;
+ const max=Math.max(data.pots.taixiu,data.pots.chanle,1);
+ document.getElementById("txBar").style.width=(data.pots.taixiu/max*100)+"%";
+ document.getElementById("clBar").style.width=(data.pots.chanle/max*100)+"%";
+ document.getElementById("botStatus").textContent=data.botsOn?"● BOT DEMO ĐANG HOẠT ĐỘNG":"● BOT DEMO ĐANG TẮT";
+ document.getElementById("txHistory").innerHTML=historyRows(data.results.taixiu);
+ document.getElementById("clHistory").innerHTML=historyRows(data.results.chanle);
+ document.getElementById("botList").innerHTML=botNames.map(n=>'<div class="bot-row"><span>'+n+' <span class="tag">BOT DEMO</span></span><span class="status">Giả lập</span></div>').join("");
+ document.getElementById("botActivity").innerHTML=data.botBets.map(b=>'<tr><td>'+b.name+' <span class="tag">BOT DEMO</span></td><td>'+gameName(b.game)+'</td><td>'+b.choice+'</td><td>'+fmt(b.amount)+'</td></tr>').join("")||'<tr><td colspan="4">Chưa có hoạt động bot.</td></tr>';
+ document.getElementById("logs").innerHTML=data.logs.map(x=>"<p>"+x+"</p>").join("")||"Chưa có lịch sử.";
+ document.getElementById("statsText").innerHTML="Tổng số phiên: "+(data.rounds.taixiu+data.rounds.chanle)+"<br>Tài Xỉu: "+data.rounds.taixiu+" phiên<br>Chẵn Lẻ: "+data.rounds.chanle+" phiên<br>Bot demo đã tạo "+data.botBets.length+" lượt cược giả lập.<br>Số sự kiện hũ demo: "+data.wins.length;
 }
-function toggleGame(g){
- let s=JSON.parse(localStorage.getItem("b59_game_states")||"{}");
- s[g]=s[g]===false?true:false;
- localStorage.setItem("b59_game_states",JSON.stringify(s));
- logAction("Đổi trạng thái trò chơi "+g);renderGames();
+function historyRows(arr){
+ return arr.map(x=>"<tr><td>"+x.id+"</td><td>"+x.result+"</td><td>"+x.time+"</td></tr>").join("")||'<tr><td colspan="3">Chưa có phiên.</td></tr>';
 }
-function setJackpot(on){
- localStorage.setItem("b59_jackpot_event",on?"active":"inactive");
- document.getElementById("jackpotStatus").textContent=on?"Sự kiện demo đang hoạt động.":"Sự kiện demo đã kết thúc.";
- logAction(on?"Kích hoạt sự kiện demo":"Kết thúc sự kiện demo");
+function gameName(g){return g==="taixiu"?"Tài Xỉu":"Chẵn Lẻ"}
+function resetStats(){
+ if(!confirm("Xóa toàn bộ dữ liệu thống kê demo và đặt lại hũ?"))return;
+ if(timer){clearInterval(timer);timer=null}
+ data=fresh();save();
 }
-function renderTransactions(){
- let t=getTransactions();
- document.getElementById("transactionTable").innerHTML=t.map((x,i)=>
- `<tr><td>${escapeHTML(x.id||("DEMO-"+(i+1)))}</td><td>${escapeHTML(x.type||"Demo")}</td><td>${Number(x.amount||0).toLocaleString("vi-VN")}</td><td>${escapeHTML(x.status||"Chờ xử lý")}</td><td><button class="success" onclick="transactionStatus(${i},'Đã duyệt')">Duyệt</button> <button class="danger" onclick="transactionStatus(${i},'Từ chối')">Từ chối</button></td></tr>`
- ).join("")||'<tr><td colspan="5">Chưa có yêu cầu demo.</td></tr>';
-}
-function transactionStatus(i,status){
- let t=getTransactions();if(!t[i])return;
- t[i].status=status;localStorage.setItem("b59_transactions",JSON.stringify(t));
- logAction("Cập nhật yêu cầu "+(t[i].id||i)+" thành "+status);refreshAll();
-}
-function renderHistory(){
- let logs=JSON.parse(localStorage.getItem("b59_admin_logs")||"[]");
- document.getElementById("historyList").innerHTML=logs.map(x=>`<div style="padding:10px 0;border-bottom:1px solid #29445f">${escapeHTML(x)}</div>`).join("")||"Chưa có thao tác.";
-}
-function refreshAll(){
- let p=getPlayers(),t=getTransactions();
- document.getElementById("playerCount").textContent=p.length;
- document.getElementById("coinCount").textContent=p.reduce((s,x)=>s+Number(x.balance||0),0).toLocaleString("vi-VN");
- document.getElementById("depositCount").textContent=t.filter(x=>x.type==="Nạp"&&x.status==="Chờ xử lý").length;
- document.getElementById("withdrawCount").textContent=t.filter(x=>x.type==="Rút"&&x.status==="Chờ xử lý").length;
- renderPlayers();renderTransactions();renderGames();renderHistory();
- setJackpotStatus();
-}
-function setJackpotStatus(){
- document.getElementById("jackpotStatus").textContent=
- localStorage.getItem("b59_jackpot_event")==="active"?"Sự kiện demo đang hoạt động.":"Chưa kích hoạt sự kiện.";
-}
+render();
 </script>
 </body>
 </html>
