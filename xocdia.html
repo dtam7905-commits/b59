@@ -3,334 +3,493 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>B59CLUB - Xóc Đĩa</title>
 <style>
 *{box-sizing:border-box}
-:root{--gold:#f5cf65;--green:#073d30;--red:#a81924}
-body{margin:0;background:#061711;color:#fff;font-family:Arial,sans-serif;overflow:hidden}
-button{cursor:pointer;font-family:inherit}
-.topbar{height:42px;background:#06291f;border-bottom:1px solid #9c7b32;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
-.topbar a{color:var(--gold);text-decoration:none;font-weight:bold;font-size:13px}
-.logo{font-weight:900;color:var(--gold);font-size:19px}
-.topright{font-size:12px;color:#f5cf65}
-.app{height:calc(100dvh - 42px);padding:7px;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:8px;max-width:1250px;margin:auto;overflow:hidden}
-.left{min-width:0;display:grid;grid-template-rows:38px minmax(145px,1fr) 30px minmax(150px,1.1fr) 48px;gap:6px;overflow:hidden}
-.balance{background:#10372c;border:1px solid #a88b42;border-radius:9px;display:flex;justify-content:space-between;align-items:center;padding:5px 12px;font-size:12px}
-.balance strong{font-size:19px;color:var(--gold)}
-.board{position:relative;min-height:0;background:radial-gradient(ellipse at center,#17674d,#06402f 65%,#08291f);border:3px solid #b18a37;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.board-title{font-size:clamp(15px,2vw,23px);font-weight:900;color:#ffe18a;margin:2px}
-.round{font-size:11px;color:#f9e7b2;margin:3px}
-.stage{position:relative;width:clamp(125px,19vh,190px);height:clamp(125px,19vh,190px);display:flex;align-items:center;justify-content:center;margin:2px}
-.plate{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,#f1e8d1 0 53%,#c2ae83 55% 62%,#796541 64% 68%,#d8bd79 70%);box-shadow:0 7px 15px #001b12;display:grid;grid-template-columns:repeat(2,42px);grid-template-rows:repeat(2,42px);gap:7px;align-content:center;justify-content:center}
-.coin{width:42px;height:42px;border-radius:50%;border:3px solid #eee;box-shadow:0 3px 5px #3338}
-.red{background:radial-gradient(circle at 30% 25%,#ffb5b5,#d00020 65%,#75000e)}
-.white{background:radial-gradient(circle at 30% 25%,#fff,#e9e9df 70%,#aaa)}
-.bowl{position:absolute;width:105%;height:87%;border-radius:50%;background:linear-gradient(130deg,#fff,#888 28%,#ddd 50%,#555 80%,#aaa);border:7px solid #c6a657;box-shadow:0 10px 14px #0018;display:flex;align-items:center;justify-content:center;color:#a77b29;font-size:24px;font-weight:900;transition:transform .3s}
-.bowl.hidden{transform:translateY(-160%) rotate(18deg)}
-.shaking{animation:shake .12s infinite alternate}
-@keyframes shake{from{transform:translate(-4px,2px) rotate(-4deg)}to{transform:translate(4px,-2px) rotate(4deg)}}
-.timerline{width:min(80%,340px);height:23px;background:#321014;border:1px solid #d6a13d;border-radius:20px;overflow:hidden;position:relative;margin:3px}
-.timerfill{height:100%;width:100%;background:linear-gradient(90deg,#f3a31c,#ffe078);transition:width .8s linear}
-.timertext{position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:900;text-shadow:0 1px 3px #000}
-.status{font-size:12px;color:#ffe28a;font-weight:bold;min-height:16px;text-align:center;padding:2px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.stat{background:#102f25;border:1px solid #98752f;border-radius:7px;text-align:center;padding:5px 2px;font-size:10px;color:#d8e7dc}
-.stat b{display:block;color:#ffdf78;font-size:14px;margin-top:2px}
-.betgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:5px;min-height:0}
-.bet{min-width:0;background:linear-gradient(145deg,#67121b,#310b12);border:1px solid #c18d3b;border-radius:9px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:3px;position:relative}
-.bet.active{border:2px solid #ffe07b;background:linear-gradient(145deg,#a32930,#541016);box-shadow:0 0 9px #ffcf58}
-.bet strong{font-size:clamp(10px,1.2vw,14px)}
-.bet small{font-size:9px;color:#f6d987}
-.bet .icon{font-size:clamp(15px,2.5vh,25px);line-height:1}
-.bet .amount{font-size:10px;color:#70ffb5;font-weight:bold}
-.chips{display:flex;justify-content:center;align-items:center;gap:7px;background:#09271e;border:1px solid #82652f;border-radius:9px;padding:4px}
-.chip{width:clamp(34px,5vh,45px);height:clamp(34px,5vh,45px);border-radius:50%;border:3px dashed #fff8;background:#12a99a;color:white;font-weight:900;font-size:11px;box-shadow:0 2px 5px #0008}
-.chip:nth-child(2){background:#d9a51c;color:#321}
-.chip:nth-child(3){background:#c82b39}
-.chip:nth-child(4){background:#6e39c6}
-.chip:nth-child(5){background:#d22b89}
-.chip:nth-child(6){background:#444}
-.chip.active{outline:3px solid #fff;transform:scale(1.08)}
-.right{min-width:0;display:grid;grid-template-rows:95px minmax(100px,1fr) minmax(100px,1fr);gap:7px;overflow:hidden}
-.jackpot{border:1px solid #c69b43;border-radius:11px;background:linear-gradient(145deg,#80521b,#321a0b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.jackpot span{font-size:12px;color:#ffe69a}
-.jackpot strong{font-size:clamp(16px,2vw,23px);color:#ffe27b;margin:4px 0}
-.jackpot small{font-size:9px;color:#ead5a5}
-.panel{background:#102d24;border:1px solid #967536;border-radius:10px;padding:8px;min-height:0;overflow:hidden}
-.panel h3{margin:0 0 7px;color:#ffdc7b;font-size:13px}
-.historydots{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
-.dot{width:100%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:bold;color:#fff}
-.dot.red{background:#d51b30}.dot.white{background:#eee;color:#333}
-.loglist{overflow:hidden;font-size:10px}
-.logrow{display:flex;justify-content:space-between;gap:4px;border-bottom:1px solid #ffffff17;padding:5px 0}
-.plus{color:#55ff9b}.minus{color:#ff7979}
-.controls{display:flex;gap:5px;justify-content:center;margin-top:7px}
-.action{border:0;border-radius:7px;padding:7px 10px;background:linear-gradient(#ffe49a,#c28b25);font-weight:bold;color:#34230a;font-size:11px}
-.action.secondary{background:#284c40;color:white;border:1px solid #8b9e82}
-.action:disabled{opacity:.4}
-.float{position:fixed;top:43%;left:50%;transform:translateX(-50%);font-size:28px;font-weight:900;z-index:20;pointer-events:none;opacity:0;text-shadow:0 2px 10px #000}
-.float.show{animation:floatup 1.5s forwards}
-.float.win{color:#4dff9b}.float.lose{color:#ff7777}
-@keyframes floatup{0%{opacity:0;margin-top:20px}20%{opacity:1;margin-top:0}100%{opacity:0;margin-top:-85px}}
-@media(max-width:650px){
- .app{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 85px;gap:5px;padding:5px}
- .left{grid-template-rows:32px minmax(125px,1fr) 25px minmax(130px,1.05fr) 40px;gap:4px}
- .right{grid-template-columns:1fr 1fr;grid-template-rows:85px;gap:5px}
- .right .panel{display:none}
- .jackpot{grid-column:1/2}
- .stats{grid-column:2/3;display:grid;grid-template-columns:1fr;grid-template-rows:repeat(3,1fr);gap:2px}
- .stat{display:flex;justify-content:space-between;align-items:center;padding:1px 5px}
- .stat b{font-size:11px;margin:0}
- .stage{width:clamp(115px,17vh,155px);height:clamp(115px,17vh,155px)}
- .coin{width:35px;height:35px}
- .plate{grid-template-columns:repeat(2,35px);grid-template-rows:repeat(2,35px);gap:6px}
- .betgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
- .bet strong{font-size:10px}
- .bet small{font-size:8px}
- .bet .icon{font-size:17px}
- .chips{gap:5px}
- .chip{width:clamp(31px,7.8vw,40px);height:clamp(31px,7.8vw,40px);font-size:9px}
+:root{--gold:#ffd45a;--green:#063b30;--green2:#0c5946;--red:#a31325}
+body{
+ margin:0;background:radial-gradient(circle at top,#155642,#031c18 75%);
+ color:#fff;font-family:Arial,sans-serif;min-height:100vh
 }
-@media(max-height:650px) and (max-width:650px){
- .left{grid-template-rows:27px minmax(100px,1fr) 22px minmax(110px,1fr) 34px}
- .stage{width:105px;height:105px}
- .coin{width:30px;height:30px}
- .plate{grid-template-columns:repeat(2,30px);grid-template-rows:repeat(2,30px);gap:5px}
- .right{grid-template-rows:65px}
- .balance strong{font-size:15px}
+header{
+ height:52px;background:#05271f;border-bottom:1px solid #98732a;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 14px;position:sticky;top:0;z-index:10
 }
-@media(min-width:651px){
- .app{grid-template-columns:minmax(0,1fr) 250px}
- .right{grid-column:2;grid-row:1}
- .left{grid-column:1;grid-row:1}
+header a{color:var(--gold);text-decoration:none;font-weight:bold}
+header strong{color:var(--gold);font-size:19px}
+main{width:min(1100px,100%);margin:auto;padding:10px}
+.top-info{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.info{
+ background:#092f26;border:1px solid #94702e;border-radius:10px;
+ text-align:center;padding:9px 5px;min-width:0
+}
+.info small{display:block;color:#b8d4c9;font-size:11px;margin-bottom:5px}
+.info b{color:var(--gold);font-size:clamp(13px,2.5vw,19px)}
+.game{
+ background:linear-gradient(145deg,#126044,#06372c);
+ border:2px solid #b58a36;border-radius:18px;
+ padding:12px;margin:10px auto;max-width:850px;
+ box-shadow:0 8px 25px #0008
+}
+.game-title{text-align:center;color:var(--gold);font-size:21px;font-weight:bold}
+.round{text-align:center;color:#d7eee5;font-size:12px;margin:5px}
+.stage{
+ display:flex;align-items:center;justify-content:center;gap:18px;
+ min-height:175px;padding:5px
+}
+.people{font-size:12px;text-align:center;color:#ffe28a}
+.people b{display:block;font-size:21px}
+.bowl-area{text-align:center}
+.bowl{
+ width:clamp(115px,22vw,165px);height:clamp(115px,22vw,165px);
+ border-radius:50%;margin:auto;position:relative;
+ display:flex;align-items:center;justify-content:center;
+ background:radial-gradient(circle at 35% 25%,#fff,#aeb6b6 24%,#50585a 58%,#171b1d 75%);
+ border:8px solid #b38b42;
+ box-shadow:0 9px 15px #0009,inset 0 0 15px #fff8;
+ transition:transform .8s
+}
+.bowl.shake{animation:shake .18s infinite}
+@keyframes shake{
+ 0%{transform:rotate(-4deg) translateX(-3px)}
+ 50%{transform:rotate(4deg) translateX(3px)}
+ 100%{transform:rotate(-4deg) translateX(-3px)}
+}
+.bowl.open{transform:translateY(-95px) scale(.78);opacity:.2}
+.bowl-label{font-size:20px;font-weight:bold;color:#ffd45a;text-shadow:1px 2px #333}
+.coins{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:9px;width:clamp(100px,22vw,150px)
+}
+.coin{
+ width:clamp(39px,8vw,58px);height:clamp(39px,8vw,58px);
+ border-radius:50%;border:3px solid #d5d5d5;
+ box-shadow:0 3px 6px #0008;display:inline-flex;
+ align-items:center;justify-content:center;
+ font-size:20px;font-weight:bold;color:#333
+}
+.white{background:radial-gradient(circle at 30% 25%,white,#ddd)}
+.red{background:radial-gradient(circle at 30% 25%,#ff8a8a,#d20b25);border-color:#ffb2b2}
+.timer-wrap{max-width:380px;margin:2px auto 8px;text-align:center}
+.timer{font-size:27px;color:var(--gold);font-weight:bold}
+.bar{height:9px;border-radius:10px;background:#263b34;overflow:hidden;margin-top:5px}
+.bar span{display:block;height:100%;width:100%;background:linear-gradient(90deg,#20d5a4,#ffd34d);transition:width .3s}
+.status{text-align:center;color:#ffe28a;font-weight:bold;font-size:14px;min-height:20px}
+.result-text{text-align:center;color:#fff;font-weight:bold;min-height:22px;font-size:14px}
+.parity{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.bet-card{
+ background:linear-gradient(145deg,#124d3b,#092e25);
+ border:1px solid #bd913d;border-radius:12px;padding:10px 8px;
+ text-align:center;min-width:0
+}
+.bet-card.big{padding:14px 8px}
+.bet-card h3{margin:0 0 5px;color:#ffe08a;font-size:16px}
+.bet-card .symbol{font-size:25px;margin-bottom:3px}
+.bet-card p{font-size:11px;color:#c7ded4;margin:3px}
+.bet-card input{
+ width:100%;max-width:170px;padding:8px;border-radius:7px;
+ border:1px solid #b68b39;background:#f7f2df;color:#222;
+ font-size:14px;text-align:center;margin:7px auto
+}
+.bet-card button{
+ display:block;width:100%;max-width:170px;margin:2px auto 0;
+ background:linear-gradient(90deg,#e8b744,#ffdf73);
+ color:#392600;border:0;border-radius:7px;padding:8px;
+ font-weight:bold;cursor:pointer
+}
+.bet-card button:disabled,.bet-card input:disabled{opacity:.4;cursor:not-allowed}
+.bet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.bet-grid .bet-card h3{font-size:13px}
+.bet-grid .symbol{font-size:25px}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{
+ border:2px solid #f8d56c;background:linear-gradient(#a92740,#650d20);
+ color:#fff;border-radius:50%;width:45px;height:45px;
+ font-weight:bold;cursor:pointer
+}
+.chip:active{transform:scale(.92)}
+.history{
+ background:#082b23;border:1px solid #9c7738;border-radius:12px;
+ padding:10px;margin-top:10px
+}
+.history h3{color:var(--gold);margin:0 0 8px;font-size:15px}
+.history-list{display:flex;gap:7px;flex-wrap:wrap;min-height:28px}
+.history-item{
+ background:#174b3c;border-radius:7px;padding:6px 8px;
+ font-size:11px;border:1px solid #547d67
+}
+.bet-log{max-height:150px;overflow:auto;font-size:12px}
+.bet-log div{padding:6px 2px;border-bottom:1px solid #ffffff18}
+.toast{
+ position:fixed;top:65px;left:50%;transform:translateX(-50%);
+ background:#f6d45c;color:#382600;padding:10px 18px;
+ border-radius:20px;font-weight:bold;z-index:30;
+ opacity:0;pointer-events:none;transition:.25s
+}
+.toast.show{opacity:1}
+.footer{text-align:center;color:#8eafa2;font-size:11px;padding:12px}
+@media(max-width:600px){
+ main{padding:7px}
+ .game{padding:9px;border-radius:14px}
+ .top-info{gap:5px}
+ .info{padding:8px 3px}
+ .stage{gap:8px;min-height:145px}
+ .people{font-size:10px}
+ .parity{gap:7px}
+ .bet-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .bet-card{padding:9px 6px}
+ .bet-card h3{font-size:14px}
+ .bet-card input{font-size:13px;padding:7px}
+ .bet-card button{font-size:12px;padding:8px 3px}
+ .coin{font-size:16px}
 }
 </style>
 </head>
 <body>
-
-<header class="topbar">
-<a href="sanh.html">‹ QUAY LẠI SẢNH</a>
-<div class="logo">B59CLUB</div>
-<div class="topright">XÓC ĐĨA</div>
+<header>
+ <a href="sanh.html">‹ SẢNH</a>
+ <strong>B59CLUB</strong>
+ <span style="color:#ffd45a;font-weight:bold">XÓC ĐĨA</span>
 </header>
 
-<main class="app">
-<section class="left">
- <div class="balance">
-  <span>💰 SỐ DƯ CỦA BẠN</span>
-  <strong id="balance">1.000.000 xu</strong>
- </div>
+<main>
+ <section class="top-info">
+  <div class="info"><small>SỐ DƯ XU ẢO</small><b id="balance">0 xu</b></div>
+  <div class="info"><small>HŨ THƯỞNG</small><b id="jackpot">369.651.109</b></div>
+  <div class="info"><small>NGƯỜI CHƠI</small><b id="players">124</b></div>
+ </section>
 
- <section class="board">
-  <div class="board-title">🎲 XÓC ĐĨA 🎲</div>
+ <section class="game">
+  <div class="game-title">🔴 XÓC ĐĨA ⚪</div>
   <div class="round" id="round">PHIÊN #1001</div>
+
   <div class="stage">
-   <div class="plate" id="plate">
-    <div class="coin red"></div><div class="coin white"></div>
-    <div class="coin red"></div><div class="coin white"></div>
+   <div class="people">👨‍🦱<b>🎲</b>NHÀ CÁI</div>
+   <div class="bowl-area">
+    <div class="coins" id="coins" style="display:none">
+     <span class="coin white">●</span>
+     <span class="coin red">●</span>
+     <span class="coin white">●</span>
+     <span class="coin red">●</span>
+    </div>
+    <div class="bowl" id="bowl"><span class="bowl-label">B59</span></div>
    </div>
-   <div class="bowl" id="bowl">B59</div>
+   <div class="people">👨‍🦰<b>🥁</b>ĐANG XÓC</div>
   </div>
-  <div class="timerline">
-   <div class="timerfill" id="timerFill"></div>
-   <div class="timertext" id="timerText">30 GIÂY</div>
+
+  <div class="timer-wrap">
+   <div class="timer" id="countdown">30s</div>
+   <div class="bar"><span id="timerBar"></span></div>
   </div>
-  <div class="status" id="status">ĐANG MỞ CƯỢC - CHỌN CỬA BẠN MUỐN ĐẶT</div>
+  <div class="status" id="betStatus">ĐANG NHẬN CƯỢC</div>
+  <div class="result-text" id="resultText">Chọn cửa và nhập số xu muốn cược</div>
  </section>
 
- <div class="stats">
-  <div class="stat">👥 NGƯỜI CHƠI <b id="players">124</b></div>
-  <div class="stat">💰 TỔNG CƯỢC <b id="totalBet">0</b></div>
-  <div class="stat">🤖 BOT CƯỢC <b id="botBet">0</b></div>
+ <div class="parity">
+  <div class="bet-card big">
+   <div class="symbol">⚫</div>
+   <h3>CHẴN</h3>
+   <p>0 - 2 - 4 đỏ</p>
+   <p>Đã cược: <b id="total-chan">0</b> xu</p>
+   <input id="amount-chan" type="number" min="5000" step="1000" placeholder="Nhập tiền cược">
+   <button onclick="placeBet('chan')">ĐẶT CHẴN</button>
+  </div>
+  <div class="bet-card big">
+   <div class="symbol">🔴</div>
+   <h3>LẺ</h3>
+   <p>1 - 3 đỏ</p>
+   <p>Đã cược: <b id="total-le">0</b> xu</p>
+   <input id="amount-le" type="number" min="5000" step="1000" placeholder="Nhập tiền cược">
+   <button onclick="placeBet('le')">ĐẶT LẺ</button>
+  </div>
  </div>
-
- <section class="betgrid" id="betGrid">
-  <button class="bet" data-key="chan"><span class="icon">⚫</span><strong>CHẴN</strong><small>0 - 2 - 4 đỏ</small><span class="amount" id="sum-chan">0</span></button>
-  <button class="bet" data-key="le"><span class="icon">🔴</span><strong>LẺ</strong><small>1 - 3 đỏ</small><span class="amount" id="sum-le">0</span></button>
-  <button class="bet" data-key="do3"><span class="icon">🔴🔴🔴</span><strong>3 ĐỎ</strong><small>3 đỏ - 1 trắng</small><span class="amount" id="sum-do3">0</span></button>
-  <button class="bet" data-key="trang3"><span class="icon">⚪⚪⚪</span><strong>3 TRẮNG</strong><small>3 trắng - 1 đỏ</small><span class="amount" id="sum-trang3">0</span></button>
-  <button class="bet" data-key="xapdoi"><span class="icon">🔴⚪</span><strong>XẤP ĐÔI</strong><small>2 đỏ - 2 trắng</small><span class="amount" id="sum-xapdoi">0</span></button>
-  <button class="bet" data-key="tudo"><span class="icon">🔴🔴🔴🔴</span><strong>TỨ ĐỎ</strong><small>4 quân đỏ</small><span class="amount" id="sum-tudo">0</span></button>
-  <button class="bet" data-key="tutrang"><span class="icon">⚪⚪⚪⚪</span><strong>TỨ TRẮNG</strong><small>4 quân trắng</small><span class="amount" id="sum-tutrang">0</span></button>
- </section>
 
  <div class="chips">
-  <button class="chip active" data-value="5000">5K</button>
-  <button class="chip" data-value="10000">10K</button>
-  <button class="chip" data-value="50000">50K</button>
-  <button class="chip" data-value="100000">100K</button>
-  <button class="chip" data-value="200000">200K</button>
-  <button class="chip" data-value="500000">500K</button>
+  <button class="chip" onclick="fillAmount(5000)">5K</button>
+  <button class="chip" onclick="fillAmount(10000)">10K</button>
+  <button class="chip" onclick="fillAmount(50000)">50K</button>
+  <button class="chip" onclick="fillAmount(100000)">100K</button>
+  <button class="chip" onclick="fillAmount(200000)">200K</button>
+  <button class="chip" onclick="fillAmount(500000)">500K</button>
  </div>
-</section>
 
-<aside class="right">
- <div class="jackpot">
-  <span>🏆 JACKPOT</span>
-  <strong id="jackpot">369.651.109</strong>
-  <small>HŨ XU ẢO ĐANG TĂNG</small>
- </div>
- <section class="panel">
-  <h3>📊 LỊCH SỬ CẦU</h3>
-  <div class="historydots" id="historyDots"></div>
-  <div class="controls">
-   <button class="action secondary" onclick="cancelBets()">HỦY CƯỢC</button>
+ <div class="bet-grid" id="betGrid"></div>
+
+ <section class="history">
+  <h3>📜 LỊCH SỬ KẾT QUẢ</h3>
+  <div class="history-list" id="historyList">Chưa có kết quả</div>
+ </section>
+
+ <section class="history">
+  <h3>🧾 LỊCH SỬ CƯỢC CỦA BẠN</h3>
+  <div class="bet-log" id="betLog">Chưa có cược nào</div>
+ </section>
+
+ <section class="history">
+  <h3>👥 TỔNG CƯỢC PHIÊN NÀY</h3>
+  <div id="totalBets">0 xu</div>
+  <div style="color:#b7d3c8;font-size:11px;margin-top:5px">
+   Cược mô phỏng của người chơi khác: <span id="botBets">0 xu</span>
   </div>
  </section>
- <section class="panel">
-  <h3>📜 LỊCH SỬ CƯỢC CỦA BẠN</h3>
-  <div class="loglist" id="betLog"><div style="color:#9ab5a8">Chưa có cược</div></div>
- </section>
-</aside>
+ <div class="footer">B59CLUB · Trò chơi mô phỏng bằng xu ảo, không có giá trị quy đổi tiền thật</div>
 </main>
 
-<div class="float" id="float"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-const BALANCE_KEY="b59_balance";
-const LOG_KEY="b59_xocdia_history";
-const labels={
- chan:"Chẵn",le:"Lẻ",do3:"3 đỏ",trang3:"3 trắng",
- xapdoi:"Xấp đôi",tudo:"Tứ đỏ",tutrang:"Tứ trắng"
-};
-const odds={chan:2,le:2,do3:4,trang3:4,xapdoi:3,tudo:8,tutrang:8};
-let balance=localStorage.getItem(BALANCE_KEY)===null?1000000:Number(localStorage.getItem(BALANCE_KEY));
-let chip=5000, bets={},seconds=30,roundNo=1001,locked=false,history=[],logs=[];
-let jackpot=369651109,botTotal=0,botPlayers=0,roundTimer=null;
+const KEY = "b59_balance";
+const doors = [
+ {id:"3trang",name:"3 TRẮNG",icon:"⚪⚪⚪",desc:"3 trắng - 1 đỏ",rate:3},
+ {id:"3do",name:"3 ĐỎ",icon:"🔴🔴🔴",desc:"3 đỏ - 1 trắng",rate:3},
+ {id:"xapdoi",name:"XẤP ĐÔI",icon:"🔴⚪",desc:"2 đỏ - 2 trắng",rate:2},
+ {id:"tudo",name:"TỨ ĐỎ",icon:"🔴🔴🔴🔴",desc:"4 quân đỏ",rate:8},
+ {id:"tutrang",name:"TỨ TRẮNG",icon:"⚪⚪⚪⚪",desc:"4 quân trắng",rate:8}
+];
 
-function money(n){return Math.floor(n).toLocaleString("vi-VN")}
-function showBalance(){
+let balance = Number(localStorage.getItem(KEY));
+if (!Number.isFinite(balance) || balance < 0) balance = 1000000;
+
+let timeLeft = 30;
+let roundNumber = 1001;
+let bettingOpen = true;
+let bets = {};
+let betHistory = [];
+let resultHistory = [];
+let roundTimer = null;
+let phase = "betting";
+let lastResult = null;
+let botTotal = 0;
+
+function money(n){
+ return Math.floor(n).toLocaleString("vi-VN");
+}
+function saveBalance(){
+ localStorage.setItem(KEY,String(balance));
+ renderBalance();
+}
+function renderBalance(){
  document.getElementById("balance").textContent=money(balance)+" xu";
- localStorage.setItem(BALANCE_KEY,String(balance));
 }
-function totalMine(){return Object.values(bets).reduce((a,b)=>a+b,0)}
-function showFloat(value,win){
- const el=document.getElementById("float");
- el.textContent=(win?"+":"-")+money(value)+" xu";
- el.className="float "+(win?"win":"lose");
- void el.offsetWidth;el.classList.add("show");
+function toast(message){
+ const el=document.getElementById("toast");
+ el.textContent=message;
+ el.classList.add("show");
+ setTimeout(()=>el.classList.remove("show"),1800);
 }
-function refreshBets(){
- Object.keys(labels).forEach(k=>{
-  document.getElementById("sum-"+k).textContent=money(bets[k]||0);
-  document.querySelector('[data-key="'+k+'"]').classList.toggle("active",!!bets[k]);
+function renderDoors(){
+ const grid=document.getElementById("betGrid");
+ grid.innerHTML="";
+ doors.forEach(d=>{
+  const card=document.createElement("div");
+  card.className="bet-card";
+  card.innerHTML=`
+   <div class="symbol">${d.icon}</div>
+   <h3>${d.name}</h3>
+   <p>${d.desc}</p>
+   <p>Đã cược: <b id="total-${d.id}">0</b> xu</p>
+   <input type="number" id="amount-${d.id}" min="5000" step="1000" placeholder="Nhập số tiền">
+   <button id="button-${d.id}" onclick="placeBet('${d.id}')">ĐẶT CƯỢC</button>`;
+  grid.appendChild(card);
  });
- document.getElementById("totalBet").textContent=money(totalMine()+botTotal);
 }
-function addBet(key){
- if(locked||seconds<=5){alert("Đã khóa cược! Chờ phiên tiếp theo.");return}
- if(balance<chip){alert("Số dư không đủ!");return}
- balance-=chip;
- bets[key]=(bets[key]||0)+chip;
- showBalance();refreshBets();
+function fillAmount(value){
+ const active=document.activeElement;
+ let target=active && active.tagName==="INPUT" ? active : document.getElementById("amount-chan");
+ if(target) target.value=value;
 }
-document.querySelectorAll(".bet").forEach(b=>b.addEventListener("click",()=>addBet(b.dataset.key)));
-document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
- if(locked)return;
- chip=Number(b.dataset.value);
- document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===b));
-}));
+function updateBetStatus(){
+ document.getElementById("betStatus").textContent=
+  bettingOpen ? "🟢 ĐANG NHẬN CƯỢC" :
+  phase==="reveal" ? "🥣 ĐANG MỞ BÁT" : "🔒 ĐÃ KHÓA CƯỢC";
+ document.querySelectorAll(".bet-card input,.bet-card button").forEach(el=>{
+  el.disabled=!bettingOpen;
+ });
+}
+function updateTotals(){
+ let total=0;
+ Object.keys(bets).forEach(id=>{
+  total+=bets[id];
+  const el=document.getElementById("total-"+id);
+  if(el) el.textContent=money(bets[id]);
+ });
+ document.getElementById("totalBets").textContent=money(total+botTotal)+" xu";
+ document.getElementById("botBets").textContent=money(botTotal)+" xu";
+}
+function placeBet(id){
+ if(!bettingOpen || timeLeft<=5){
+  toast("Đã khóa cược!");
+  return;
+ }
+ const input=document.getElementById("amount-"+id);
+ const amount=Number(input.value);
+ if(!Number.isFinite(amount)||amount<5000){
+  toast("Mức cược tối thiểu là 5.000 xu");
+  return;
+ }
+ if(amount>balance){
+  toast("Số dư không đủ!");
+  return;
+ }
+ balance-=amount;
+ bets[id]=(bets[id]||0)+amount;
+ saveBalance();
+ updateTotals();
+ addBetLog("Đặt "+doors.find(d=>d.id===id).name,amount,"minus");
+ input.value="";
+ toast("Đặt cược thành công: -"+money(amount)+" xu");
+}
 function cancelBets(){
- if(locked||seconds<=5){alert("Đã khóa cược, không thể hủy!");return}
- const refund=totalMine();
- if(!refund)return;
- balance+=refund;bets={};showBalance();refreshBets();
- document.getElementById("status").textContent="ĐÃ HỦY TOÀN BỘ CƯỢC";
+ let total=Object.values(bets).reduce((a,b)=>a+b,0);
+ if(total<=0) return;
+ balance+=total;
+ betHistory.unshift("Hủy cược phiên #"+roundNumber+": +"+money(total)+" xu");
+ bets={};
+ saveBalance();
+ updateTotals();
+ renderBetLog();
+ toast("Đã hoàn cược +"+money(total)+" xu");
 }
-function renderLog(){
- const box=document.getElementById("betLog");
- if(!logs.length){box.innerHTML='<div style="color:#9ab5a8">Chưa có cược</div>';return}
- box.innerHTML=logs.slice(0,12).map(x=>
- `<div class="logrow"><span>${x.round} · ${x.name}<br><small>${x.time}</small></span><b class="${x.win?'plus':'minus'}">${x.win?'+':'-'}${money(x.amount)}</b></div>`
- ).join("");
+function addBetLog(label,amount,type){
+ betHistory.unshift(label+" · "+(type==="plus"?"+":"-")+money(amount)+" xu");
+ renderBetLog();
 }
-function renderRoad(){
- document.getElementById("historyDots").innerHTML=history.slice(0,18).map(x=>
- `<div class="dot ${x.red%2?'red':'white'}">${x.red%2?'L':'C'}</div>`
- ).join("");
+function renderBetLog(){
+ const el=document.getElementById("betLog");
+ el.innerHTML=betHistory.slice(0,30).map(x=>"<div>"+x+"</div>").join("")||"Chưa có cược nào";
 }
 function updateTimer(){
- document.getElementById("timerText").textContent=seconds+" GIÂY";
- document.getElementById("timerFill").style.width=(seconds/30*100)+"%";
- document.getElementById("status").textContent=seconds>5?"ĐANG MỞ CƯỢC - CÒN "+seconds+" GIÂY":seconds>0?"🔒 ĐÃ KHÓA CƯỢC - CHỜ MỞ BÁT":"ĐANG MỞ BÁT...";
+ document.getElementById("countdown").textContent=timeLeft+"s";
+ document.getElementById("timerBar").style.width=(timeLeft/30*100)+"%";
 }
-function botActivity(){
- botPlayers=100+Math.floor(Math.random()*45);
- botTotal+=Math.floor(Math.random()*450000)+50000;
- document.getElementById("players").textContent=botPlayers;
- document.getElementById("botBet").textContent=money(botTotal);
- document.getElementById("totalBet").textContent=money(totalMine()+botTotal);
- jackpot+=Math.floor(Math.random()*18000)+2000;
- document.getElementById("jackpot").textContent=money(jackpot);
+function startRound(){
+ clearInterval(roundTimer);
+ phase="betting";
+ timeLeft=30;
+ bettingOpen=true;
+ bets={};
+ botTotal=Math.floor(Math.random()*2500000)+300000;
+ document.getElementById("round").textContent="PHIÊN #"+roundNumber;
+ document.getElementById("bowl").classList.remove("open","shake");
+ document.getElementById("bowl").style.display="flex";
+ document.getElementById("coins").style.display="none";
+ document.getElementById("resultText").textContent="Chọn cửa và nhập số xu muốn cược";
+ updateTimer();
+ updateBetStatus();
+ updateTotals();
+
+ roundTimer=setInterval(()=>{
+  timeLeft--;
+  if(timeLeft<=5){
+   bettingOpen=false;
+   updateBetStatus();
+  }
+  updateTimer();
+
+  if(timeLeft<=0){
+   clearInterval(roundTimer);
+   revealResult();
+  }
+ },1000);
 }
-function reveal(){
- locked=true;
- document.getElementById("status").textContent="🥣 ĐANG MỞ BÁT...";
+function revealResult(){
+ phase="reveal";
+ bettingOpen=false;
+ updateBetStatus();
+ document.getElementById("betStatus").textContent="🥣 ĐANG MỞ BÁT";
+ document.getElementById("resultText").textContent="Nhà cái đang mở bát...";
  const bowl=document.getElementById("bowl");
- bowl.classList.add("shaking");
+ bowl.classList.add("shake");
+
  setTimeout(()=>{
   const redCount=Math.floor(Math.random()*5);
-  const colors=Array.from({length:4},(_,i)=>i<redCount?"red":"white").sort(()=>Math.random()-.5);
-  document.getElementById("plate").innerHTML=colors.map(c=>`<div class="coin ${c}"></div>`).join("");
-  bowl.classList.remove("shaking");bowl.classList.add("hidden");
-  settle(redCount);
- },1600);
+  const pieces=Array.from({length:4},(_,i)=>i<redCount?"red":"white");
+  // Trộn vị trí 4 quân
+  for(let i=pieces.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [pieces[i],pieces[j]]=[pieces[j],pieces[i]];
+  }
+  bowl.classList.remove("shake");
+  bowl.classList.add("open");
+  document.getElementById("coins").innerHTML=pieces.map(c=>
+   `<span class="coin ${c}">●</span>`).join("");
+  document.getElementById("coins").style.display="grid";
+
+  const red=pieces.filter(x=>x==="red").length;
+  lastResult={red,white:4-red};
+  const name=red%2===0?"CHẴN":"LẺ";
+  document.getElementById("resultText").textContent=
+   `${name} · ${red} đỏ - ${4-red} trắng`;
+  document.getElementById("betStatus").textContent="✅ KẾT QUẢ PHIÊN #"+roundNumber;
+  settleBets(red);
+  resultHistory.unshift({red,name,round:roundNumber});
+  renderHistory();
+  document.getElementById("countdown").textContent="KẾT QUẢ";
+  document.getElementById("timerBar").style.width="0%";
+
+  setTimeout(()=>{
+   roundNumber++;
+   startRound();
+  },5000);
+ },1800);
 }
-function settle(redCount){
- const results={
-  chan:redCount%2===0,le:redCount%2===1,
-  do3:redCount===3,trang3:redCount===1,
-  xapdoi:redCount===2,tudo:redCount===4,tutrang:redCount===0
- };
- let won=0,lost=0;
- const now=new Date().toLocaleTimeString("vi-VN");
- Object.keys(bets).forEach(k=>{
-  const amount=bets[k]||0;
-  if(!amount)return;
-  if(results[k])won+=amount*odds[k];
-  else lost+=amount;
-  logs.unshift({round:roundNo,name:labels[k],time:now,win:!!results[k],amount:results[k]?amount*(odds[k]-1):amount});
+function wins(id,red){
+ if(id==="chan") return red%2===0;
+ if(id==="le") return red%2===1;
+ if(id==="3trang") return red===1;
+ if(id==="3do") return red===3;
+ if(id==="xapdoi") return red===2;
+ if(id==="tudo") return red===4;
+ if(id==="tutrang") return red===0;
+ return false;
+}
+function settleBets(red){
+ let won=0, lost=0;
+ const all={...bets};
+ Object.keys(all).forEach(id=>{
+  const amount=all[id];
+  const door=doors.find(d=>d.id===id);
+  let rate=id==="chan"||id==="le"?1:door.rate;
+  if(wins(id,red)){
+   const reward=amount*rate;
+   balance+=reward;
+   won+=reward;
+   addBetLog("Thắng "+id, reward,"plus");
+  }else{
+   lost+=amount;
+   addBetLog("Thua "+id,amount,"minus");
+  }
  });
- if(won){
-  balance+=won;
-  showFloat(won,true);
- }else if(lost){
-  showFloat(lost,false);
+ saveBalance();
+ updateTotals();
+ if(won>0){
+  toast("🎉 Bạn nhận được +"+money(won)+" xu!");
+  document.getElementById("resultText").textContent+=" · Thắng +"+money(won)+" xu";
+ }else if(lost>0){
+  document.getElementById("resultText").textContent+=" · Chúc bạn may mắn phiên sau!";
  }
- showBalance();renderLog();
- const label=redCount===0?"TỨ TRẮNG":redCount===1?"3 TRẮNG":redCount===2?"XẤP ĐÔI":redCount===3?"3 ĐỎ":"TỨ ĐỎ";
- document.getElementById("status").textContent=label+" · "+(won?"BẠN THẮNG "+money(won)+" XU":"KẾT THÚC PHIÊN");
- history.unshift({red:redCount});history=history.slice(0,18);renderRoad();
- localStorage.setItem(LOG_KEY,JSON.stringify(logs.slice(0,50)));
- bets={};botTotal=0;refreshBets();
- setTimeout(nextRound,2600);
+ bets={};
 }
-function nextRound(){
- roundNo++;
- seconds=30;locked=false;
- document.getElementById("round").textContent="PHIÊN #"+roundNo;
- document.getElementById("bowl").classList.remove("hidden");
- document.getElementById("plate").innerHTML='<div class="coin red"></div><div class="coin white"></div><div class="coin red"></div><div class="coin white"></div>';
- document.getElementById("status").textContent="ĐANG MỞ CƯỢC";
- updateTimer();
+function renderHistory(){
+ const el=document.getElementById("historyList");
+ el.innerHTML=resultHistory.slice(0,24).map(r=>
+  `<span class="history-item">#${r.round} ${r.name} · ${r.red}🔴 ${4-r.red}⚪</span>`
+ ).join("")||"Chưa có kết quả";
 }
-function tick(){
- if(!locked){
-  seconds--;
-  if(seconds<=5&&seconds>0)locked=true;
-  updateTimer();
-  if(seconds<=0){clearInterval(roundTimer);reveal();return}
-  if(seconds>5)botActivity();
- }
-}
-function start(){
- showBalance();
- try{logs=JSON.parse(localStorage.getItem(LOG_KEY)||"[]")}catch(e){logs=[]}
- renderLog();renderRoad();refreshBets();updateTimer();
- roundTimer=setInterval(tick,1000);
-}
-start();
+renderDoors();
+renderBalance();
+updateTotals();
+renderBetLog();
+renderHistory();
+startRound();
+
+setInterval(()=>{
+ const current=Number(document.getElementById("jackpot").textContent.replace(/\./g,""));
+ document.getElementById("jackpot").textContent=money(current+Math.floor(Math.random()*1200+200));
+ document.getElementById("players").textContent=110+Math.floor(Math.random()*45);
+},1800);
 </script>
 </body>
 </html>
